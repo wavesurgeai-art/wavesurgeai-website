@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Landing Pages — WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628;
+    --navy: #1B3A6B;
+    --steel-blue: #4A90D9;
+    --gold: #C9A84C;
+    --white: #FFFFFF;
+    --gray: #8892A4;
+    --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 20px 60px;
+    display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,22,40,0.98);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); }
+  .nav-logo .surge { color: var(--white); }
+  .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero {
+    min-height: 50vh;
+    display: flex; align-items: center; justify-content: center;
+    text-align: center;
+    padding: 140px 60px 80px;
+    background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%);
+  }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 8vw, 100px); letter-spacing: 4px; line-height: 1; margin-bottom: 24px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 600px; margin: 0 auto 40px; line-height: 1.7; }
+  .hero-price {
+    display: inline-block;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid var(--gold);
+    padding: 12px 32px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 3px;
+    color: var(--gold);
+    margin-bottom: 40px;
+  }
+
+  .btn-primary {
+    background: var(--gold); color: var(--deep-navy);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+    border: none; cursor: pointer; transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+
+  .btn-secondary {
+    background: transparent; color: var(--white);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700;
+    letter-spacing: 2px; text-transform: uppercase; text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s;
+    display: inline-block;
+  }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 600px; }
+
+  .includes-grid {
+    display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin-top: 48px;
+  }
+  .include-item {
+    background: var(--light-navy);
+    padding: 32px;
+    border-left: 3px solid var(--gold);
+    transition: all 0.3s;
+  }
+  .include-item:hover { background: var(--navy); transform: translateX(4px); }
+  .include-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .include-text { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  .process-steps {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px;
+  }
+  .step {
+    background: var(--light-navy); padding: 32px 24px; text-align: center; position: relative;
+  }
+  .step-number { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: rgba(201,168,76,0.15); letter-spacing: 2px; line-height: 1; margin-bottom: 12px; }
+  .step-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .step-text { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  .contact-strip {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 60px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    margin: 0 60px 100px;
+  }
+  .contact-strip::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue));
+  }
+  .contact-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .contact-strip h2 span { color: var(--gold); }
+  .contact-strip p { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .contact-methods { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-method { text-align: center; }
+  .contact-method-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-method-value { font-size: 15px; color: var(--white); text-decoration: none; transition: color 0.3s; display: block; }
+  .contact-method-value:hover { color: var(--gold); }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  .guarantee {
+    display: flex; align-items: center; gap: 16px;
+    background: rgba(201,168,76,0.05);
+    border: 1px solid rgba(201,168,76,0.15);
+    padding: 24px 32px; margin-top: 48px;
+  }
+  .guarantee-icon { font-size: 32px; flex-shrink: 0; }
+  .guarantee-text { font-size: 15px; color: var(--gray); line-height: 1.6; }
+  .guarantee-text strong { color: var(--white); }
+
+  footer {
+    background: rgba(5,12,22,0.98);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 32px 60px;
+    text-align: center;
+  }
+  .footer-copy { font-size: 13px; color: var(--gray); }
+  .footer-copy span { color: var(--gold); }
+  .footer-back { display: inline-block; margin-top: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-blue); text-decoration: none; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 120px 24px 60px; }
+    section { padding: 60px 24px; }
+    .includes-grid { grid-template-columns: 1fr; }
+    .process-steps { grid-template-columns: repeat(2, 1fr); }
+    .contact-strip { margin: 0 24px 60px; padding: 40px 24px; }
+    .contact-methods { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="WaveSurgeAI-Website.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="WaveSurgeAI-Website.html#website-design" class="nav-back">← Back To Services</a>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Professional Web Design</p>
+    <h1 class="hero-title">Landing <span>Pages</span></h1>
+    <p class="hero-sub">A single powerful page designed to capture leads, sell products, and convert visitors into customers — delivered in 3-5 business days.</p>
+    <div class="hero-price">Starting at $297</div>
+    <br>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#contact-strip" class="btn-primary">Get Started Today</a>
+      <a href="#includes" class="btn-secondary">See What's Included</a>
+    </div>
+  </div>
+</div>
+
+<section id="includes">
+  <p class="section-eyebrow">What You Get</p>
+  <h2 class="section-title">Everything <span>Included</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Every landing page is built with military precision — no corners cut, no shortcuts taken.</p>
+  <div class="includes-grid">
+    <div class="include-item">
+      <div class="include-title">Custom Design</div>
+      <div class="include-text">Fully custom layout built around your brand colors, fonts, and identity. No templates. No cookie-cutter designs.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Mobile Responsive</div>
+      <div class="include-text">Looks and works perfectly on every device — desktop, tablet, and phone. Your customers browse everywhere.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Lead Capture Form</div>
+      <div class="include-text">Email signup or contact form built in so you can start collecting leads from day one. Connected to your preferred email tool.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Call To Action Sections</div>
+      <div class="include-text">Strategic CTA buttons and sections placed to maximize conversions — telling visitors exactly what to do next.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">SEO Foundation</div>
+      <div class="include-text">Page title, meta description, and heading structure set up correctly so search engines can find and rank your page.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">2 Revisions Included</div>
+      <div class="include-text">Two rounds of revisions included at no extra charge. Additional revisions available at an agreed hourly rate.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">3-5 Business Day Delivery</div>
+      <div class="include-text">Your landing page delivered in 3-5 business days from project kickoff. Fast, reliable, and on schedule — every time.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">HTML File Delivery</div>
+      <div class="include-text">You receive a complete, ready-to-host HTML file — works on any hosting platform including GoDaddy, Framer, and Squarespace.</div>
+    </div>
+  </div>
+  <div class="guarantee">
+    <span class="guarantee-icon">⭐</span>
+    <p class="guarantee-text"><strong>The Colonel Standard:</strong> Every landing page is reviewed against a precision checklist before delivery. If it doesn't meet the standard, it doesn't ship. That's not a policy — it's a personal commitment.</p>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <p class="section-eyebrow">How It Works</p>
+  <h2 class="section-title">The <span>Process</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Simple, clear, and efficient — just like a well-run mission.</p>
+  <div class="process-steps">
+    <div class="step">
+      <div class="step-number">01</div>
+      <div class="step-title">Brief</div>
+      <div class="step-text">You tell me about your business, your goals, and your audience. I ask the right questions.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">02</div>
+      <div class="step-title">Design</div>
+      <div class="step-text">I build your landing page using AI-assisted design tools and your brand identity.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">03</div>
+      <div class="step-title">Review</div>
+      <div class="step-text">You review the design and request up to 2 rounds of revisions at no extra charge.</div>
+    </div>
+    <div class="step">
+      <div class="step-number">04</div>
+      <div class="step-title">Deliver</div>
+      <div class="step-text">Your finished landing page is delivered within 3-5 business days. Ready to go live.</div>
+    </div>
+  </div>
+</section>
+
+<div id="contact-strip" class="contact-strip">
+  <h2>Ready To <span>Launch?</span></h2>
+  <p>Get your professional landing page built and delivered in 3-5 business days. Reach out through any of the methods below and let's get started.</p>
+  <div class="contact-methods">
+    <div class="contact-method">
+      <div class="contact-method-label">Phone</div>
+      <a href="tel:2707910582" class="contact-method-value">270-791-0582</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Email</div>
+      <a href="mailto:info@wavesurgeai.com" class="contact-method-value">info@wavesurgeai.com</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Website</div>
+      <a href="WaveSurgeAI-Website.html#contact" class="contact-method-value">Contact Form</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">TikTok / Instagram</div>
+      <a href="https://tiktok.com/@WaveSurgeAI" target="_blank" class="contact-method-value">@WaveSurgeAI</a>
+    </div>
+  </div>
+  <div class="contact-buttons">
+    <a href="tel:2707910582" class="btn-primary">Call Now</a>
+    <a href="WaveSurgeAI-Website.html#contact" class="btn-secondary">Send A Message</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span>. All rights reserved. — Colonel, US Army (Retired)</div>
+  <a href="WaveSurgeAI-Website.html" class="footer-back">← Return To WaveSurgeAI.com</a>
+</footer>
+
+</body>
+</html>

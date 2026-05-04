@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Social Media Marketing — WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero { min-height: 50vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px 60px 80px; background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%); position: relative; overflow: hidden; }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 7vw, 90px); letter-spacing: 4px; line-height: 1; margin-bottom: 24px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 600px; }
+
+  .packages-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .package-card { background: var(--light-navy); padding: 40px 32px; position: relative; transition: all 0.3s; }
+  .package-card.featured { background: var(--navy); border: 1px solid rgba(201,168,76,0.3); }
+  .package-card:hover { transform: translateY(-4px); }
+  .package-badge { display: inline-block; background: var(--gold); color: var(--deep-navy); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px; }
+  .package-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .package-price { font-family: 'Bebas Neue', sans-serif; font-size: 48px; color: var(--gold); letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+  .package-period { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
+  .package-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px; }
+  .package-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .package-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray); line-height: 1.5; }
+  .package-features li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+  .package-note { font-size: 12px; color: var(--gray); font-style: italic; margin-top: 12px; padding-top: 12px; border-top: 1px solid rgba(255,255,255,0.06); }
+
+  .platforms-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px; }
+  .platform-card { background: var(--light-navy); padding: 28px 20px; text-align: center; transition: all 0.3s; }
+  .platform-card:hover { background: var(--navy); transform: translateY(-4px); }
+  .platform-icon { font-size: 32px; margin-bottom: 12px; display: block; }
+  .platform-name { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 6px; }
+  .platform-text { font-size: 13px; color: var(--gray); line-height: 1.5; }
+
+  .includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin-top: 48px; }
+  .include-item { background: var(--light-navy); padding: 32px; border-left: 3px solid var(--steel-blue); transition: all 0.3s; }
+  .include-item:hover { background: var(--navy); transform: translateX(4px); }
+  .include-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .include-text { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  .contact-strip { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; text-align: center; position: relative; overflow: hidden; margin: 0 60px 100px; }
+  .contact-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue)); }
+  .contact-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .contact-strip h2 span { color: var(--gold); }
+  .contact-strip p { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .contact-methods { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-method { text-align: center; }
+  .contact-method-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-method-value { font-size: 15px; color: var(--white); text-decoration: none; transition: color 0.3s; display: block; }
+  .contact-method-value:hover { color: var(--gold); }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); } .footer-copy span { color: var(--gold); }
+  .footer-back { display: inline-block; margin-top: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-blue); text-decoration: none; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
+    .packages-grid { grid-template-columns: 1fr; } .platforms-grid { grid-template-columns: repeat(2, 1fr); }
+    .includes-grid { grid-template-columns: 1fr; }
+    .contact-strip { margin: 0 24px 60px; padding: 40px 24px; } .contact-methods { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="WaveSurgeAI-Website.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="WaveSurgeAI-Website.html#website-design" class="nav-back">← Back To Services</a>
+</nav>
+
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Digital Marketing Services</p>
+    <h1 class="hero-title">Social Media <span>Marketing</span></h1>
+    <p class="hero-sub">Full campaign strategy, content creation, and platform management — built with military precision and AI-powered efficiency to grow your brand and drive real results.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#packages" class="btn-primary">See Packages</a>
+      <a href="#contact-strip" class="btn-secondary">Get A Custom Quote</a>
+    </div>
+  </div>
+</div>
+
+<section id="packages">
+  <p class="section-eyebrow">Choose Your Package</p>
+  <h2 class="section-title">Marketing <span>Packages</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Every package includes content creation. Scheduling, posting, and full campaign strategy are available as add-ons.</p>
+  <div class="packages-grid">
+
+    <div class="package-card">
+      <div class="package-title">Content Creation</div>
+      <div class="package-price">Custom</div>
+      <div class="package-period">Quoted Per Project</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Custom social media post graphics</li>
+        <li>AI-generated visual content</li>
+        <li>Caption and copy writing</li>
+        <li>Brand-consistent design throughout</li>
+        <li>Delivered as ready-to-post files</li>
+        <li>TikTok, Instagram, Facebook formats</li>
+      </ul>
+      <a href="#contact-strip" class="btn-secondary" style="width:100%; text-align:center;">Get A Quote</a>
+    </div>
+
+    <div class="package-card featured">
+      <div class="package-badge">Most Popular</div>
+      <div class="package-title">Content + Management</div>
+      <div class="package-price">Custom</div>
+      <div class="package-period">Monthly Retainer</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Everything in Content Creation</li>
+        <li>Scheduling and posting included</li>
+        <li>Consistent posting calendar maintained</li>
+        <li>Platform management across channels</li>
+        <li>Monthly content planning session</li>
+        <li>Performance overview included</li>
+      </ul>
+      <div class="package-note">Scheduling and posting billed as additional monthly fee — quoted based on platforms and posting frequency.</div>
+      <br>
+      <a href="#contact-strip" class="btn-primary" style="width:100%; text-align:center;">Get A Quote</a>
+    </div>
+
+    <div class="package-card">
+      <div class="package-title">Full Campaign Strategy</div>
+      <div class="package-price">Custom</div>
+      <div class="package-period">Monthly Retainer</div>
+      <div class="package-divider"></div>
+      <ul class="package-features">
+        <li>Everything in Content + Management</li>
+        <li>Full social media campaign strategy</li>
+        <li>Audience targeting and growth plan</li>
+        <li>Content calendar built monthly</li>
+        <li>Brand voice and messaging guide</li>
+        <li>Strategy review and adjustment</li>
+      </ul>
+      <div class="package-note">Full campaign strategy billed as additional monthly fee on top of content creation and management — quoted per client.</div>
+      <br>
+      <a href="#contact-strip" class="btn-secondary" style="width:100%; text-align:center;">Get A Quote</a>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <p class="section-eyebrow">Platforms We Work With</p>
+  <h2 class="section-title">Your <span>Platforms</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Content created and optimized for the platforms where your audience lives.</p>
+  <div class="platforms-grid">
+    <div class="platform-card">
+      <span class="platform-icon">📱</span>
+      <div class="platform-name">TikTok</div>
+      <div class="platform-text">Short-form video content, hooks, captions, and trend-aligned posts.</div>
+    </div>
+    <div class="platform-card">
+      <span class="platform-icon">📸</span>
+      <div class="platform-name">Instagram</div>
+      <div class="platform-text">Feed posts, Stories, Reels, and carousel content built for engagement.</div>
+    </div>
+    <div class="platform-card">
+      <span class="platform-icon">📘</span>
+      <div class="platform-name">Facebook</div>
+      <div class="platform-text">Business page content, posts, and community engagement copy.</div>
+    </div>
+    <div class="platform-card">
+      <span class="platform-icon">📌</span>
+      <div class="platform-name">Pinterest</div>
+      <div class="platform-text">Pin graphics and descriptions optimized for discovery and traffic.</div>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <p class="section-eyebrow">What Makes Us Different</p>
+  <h2 class="section-title">The <span>Difference</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">AI-powered content creation combined with military-level strategy and execution discipline.</p>
+  <div class="includes-grid">
+    <div class="include-item">
+      <div class="include-title">AI-Powered Content</div>
+      <div class="include-text">Every piece of content is created using the latest AI tools — Midjourney for visuals, AI writing for copy — giving you premium quality at efficient pricing.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Military Precision</div>
+      <div class="include-text">Posting schedules maintained with discipline. Content delivered on time. Strategy executed without shortcuts. That's the standard — always.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Brand Consistent</div>
+      <div class="include-text">Every post, every graphic, every caption aligned with your brand identity — colors, voice, and messaging consistent across every platform.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Veteran Audience Expertise</div>
+      <div class="include-text">If your audience includes veterans, military families, or the 50+ community — nobody understands how to reach them more authentically than a retired Colonel.</div>
+    </div>
+  </div>
+</section>
+
+<div id="contact-strip" class="contact-strip">
+  <h2>Ready To <span>Grow?</span></h2>
+  <p>All social media marketing packages are custom quoted based on your platforms, posting frequency, and campaign needs. Reach out and let's build your strategy.</p>
+  <div class="contact-methods">
+    <div class="contact-method">
+      <div class="contact-method-label">Phone</div>
+      <a href="tel:2707910582" class="contact-method-value">270-791-0582</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Email</div>
+      <a href="mailto:info@wavesurgeai.com" class="contact-method-value">info@wavesurgeai.com</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Website</div>
+      <a href="WaveSurgeAI-Website.html#contact" class="contact-method-value">Contact Form</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">TikTok / Instagram</div>
+      <a href="https://tiktok.com/@WaveSurgeAI" target="_blank" class="contact-method-value">@WaveSurgeAI</a>
+    </div>
+  </div>
+  <div class="contact-buttons">
+    <a href="tel:2707910582" class="btn-primary">Call Now</a>
+    <a href="WaveSurgeAI-Website.html#contact" class="btn-secondary">Send A Message</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span>. All rights reserved. — Colonel, US Army (Retired)</div>
+  <a href="WaveSurgeAI-Website.html" class="footer-back">← Return To WaveSurgeAI.com</a>
+</footer>
+
+</body>
+</html>

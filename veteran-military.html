@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Veteran & Military Websites — WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --red: #E74C3C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero { min-height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px 60px 80px; position: relative; overflow: hidden; background: linear-gradient(180deg, #0D1E35 0%, var(--deep-navy) 100%); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(231,76,60,0.06) 0%, transparent 70%); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(231,76,60,0.1); border: 1px solid rgba(231,76,60,0.4); padding: 8px 20px; margin-bottom: 28px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--red); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 8vw, 100px); letter-spacing: 4px; line-height: 1; margin-bottom: 24px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+  .hero-colonel { display: inline-block; margin-bottom: 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; color: var(--gold); border-top: 1px solid rgba(201,168,76,0.3); border-bottom: 1px solid rgba(201,168,76,0.3); padding: 10px 0; }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 600px; }
+
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .who-card { background: var(--light-navy); padding: 36px; border-top: 3px solid var(--red); transition: all 0.3s; }
+  .who-card:hover { background: var(--navy); transform: translateY(-4px); }
+  .who-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .who-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--white); margin-bottom: 10px; }
+  .who-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+  .advantage-block { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; margin-top: 48px; position: relative; overflow: hidden; }
+  .advantage-block::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--gold), var(--red)); }
+  .advantage-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 20px; }
+  .advantage-title span { color: var(--gold); }
+  .advantage-text { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+  .advantage-quote { font-size: 20px; color: var(--white); font-style: italic; margin-top: 24px; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.1); }
+  .advantage-cite { font-size: 13px; font-style: normal; color: var(--gold); font-family: 'Montserrat', sans-serif; font-weight: 600; letter-spacing: 1px; margin-top: 10px; display: block; }
+
+  .includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin-top: 48px; }
+  .include-item { background: var(--light-navy); padding: 32px; border-left: 3px solid var(--gold); transition: all 0.3s; }
+  .include-item:hover { background: var(--navy); transform: translateX(4px); }
+  .include-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .include-text { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  .contact-strip { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; text-align: center; position: relative; overflow: hidden; margin: 0 60px 100px; }
+  .contact-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--red), var(--gold), var(--red)); }
+  .contact-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .contact-strip h2 span { color: var(--gold); }
+  .contact-strip p { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .contact-methods { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-method { text-align: center; }
+  .contact-method-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-method-value { font-size: 15px; color: var(--white); text-decoration: none; transition: color 0.3s; display: block; }
+  .contact-method-value:hover { color: var(--gold); }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); } .footer-copy span { color: var(--gold); }
+  .footer-back { display: inline-block; margin-top: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-blue); text-decoration: none; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
+    .who-grid { grid-template-columns: 1fr; } .includes-grid { grid-template-columns: 1fr; }
+    .advantage-block { padding: 40px 32px; }
+    .contact-strip { margin: 0 24px 60px; padding: 40px 24px; } .contact-methods { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="WaveSurgeAI-Website.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="WaveSurgeAI-Website.html#website-design" class="nav-back">← Back To Services</a>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-badge">★ Built By A Colonel — For Those Who Served</div>
+    <p class="hero-eyebrow">Specialized Web Design</p>
+    <h1 class="hero-title">Veteran <span>&</span> Military</h1>
+    <p class="hero-sub">Websites built for veteran-owned businesses, military organizations, and patriotic brands — by someone who understands your mission, your values, and your audience from the inside.</p>
+    <div class="hero-colonel">Colonel, US Army (Retired) — 27 Years of Service</div>
+    <br>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#contact-strip" class="btn-primary">Discuss Your Mission</a>
+      <a href="#who" class="btn-secondary">See If This Is For You</a>
+    </div>
+  </div>
+</div>
+
+<section id="who">
+  <p class="section-eyebrow">Who This Is For</p>
+  <h2 class="section-title">Built For <span>Those Who Served</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">If your brand has military roots, patriotic values, or a veteran audience — this is your service.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-icon">🎖️</span>
+      <div class="who-title">Veteran-Owned Businesses</div>
+      <div class="who-text">You built something after service — now let's build a website that honors that journey and attracts customers who value what you stand for.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🦅</span>
+      <div class="who-title">Military Organizations</div>
+      <div class="who-text">VFW posts, veteran nonprofits, military associations, and patriotic organizations that need a professional online presence.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🛡️</span>
+      <div class="who-title">Patriotic Brands</div>
+      <div class="who-text">Businesses and creators whose brand identity is rooted in American values, military culture, and service to country.</div>
+    </div>
+  </div>
+
+  <div class="advantage-block">
+    <h3 class="advantage-title">The <span>Colonel Advantage</span></h3>
+    <p class="advantage-text">Every other web designer will build you a website. But they'll be guessing at your audience, your values, and your mission. I'm not guessing. I lived it for 27 years.</p>
+    <p class="advantage-text">I know what authenticity looks like in this space — and I know what doesn't. When your website is built by someone who wore the uniform, your audience feels the difference. Veterans recognize it immediately. Families of service members feel it. Patriotic buyers trust it.</p>
+    <p class="advantage-text">That's not a feature I can add. It's something I bring to every project by default.</p>
+    <blockquote class="advantage-quote">
+      "Leadership isn't a title. It's a standard you set every single day."
+      <cite class="advantage-cite">— Colonel, US Army (Retired) · WaveSurgeAI</cite>
+    </blockquote>
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <p class="section-eyebrow">What You Get</p>
+  <h2 class="section-title">Everything <span>Included</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Every veteran and military website includes all standard features plus specialized elements for your audience.</p>
+  <div class="includes-grid">
+    <div class="include-item">
+      <div class="include-title">Authentic Military Aesthetic</div>
+      <div class="include-text">Design language that resonates with veterans and military families — not a civilian designer's guess at what military looks like.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Special Pricing</div>
+      <div class="include-text">Veteran-owned businesses and military nonprofits receive special pricing consideration. Service matters — and so does supporting those who served.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Full Custom Design</div>
+      <div class="include-text">Every page custom built around your brand — colors, imagery, copy, and identity all aligned with your mission.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Mobile Responsive</div>
+      <div class="include-text">Perfect on every device — desktop, tablet, and phone. Your audience is everywhere and your site will be too.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">2 Revisions Included</div>
+      <div class="include-text">Two rounds of revisions at no extra charge. Additional revisions available at an agreed rate.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">3-5 Business Day Delivery</div>
+      <div class="include-text">Your website delivered in 3-5 business days. On time, on brief — every time. That's the standard.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">SEO Foundation</div>
+      <div class="include-text">All pages optimized with correct structure, titles, and descriptions so your community can find you.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">SDVOSB Awareness</div>
+      <div class="include-text">I understand Service Disabled Veteran Owned Small Business designation and can help position your site to reflect and support that status.</div>
+    </div>
+  </div>
+</section>
+
+<div id="contact-strip" class="contact-strip">
+  <h2>Let's Discuss Your <span>Mission.</span></h2>
+  <p>Special pricing available for veteran-owned businesses and military nonprofits. Reach out through any of the methods below and let's get started.</p>
+  <div class="contact-methods">
+    <div class="contact-method">
+      <div class="contact-method-label">Phone</div>
+      <a href="tel:2707910582" class="contact-method-value">270-791-0582</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Email</div>
+      <a href="mailto:info@wavesurgeai.com" class="contact-method-value">info@wavesurgeai.com</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Website</div>
+      <a href="WaveSurgeAI-Website.html#contact" class="contact-method-value">Contact Form</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">TikTok / Instagram</div>
+      <a href="https://tiktok.com/@WaveSurgeAI" target="_blank" class="contact-method-value">@WaveSurgeAI</a>
+    </div>
+  </div>
+  <div class="contact-buttons">
+    <a href="tel:2707910582" class="btn-primary">Call Now</a>
+    <a href="WaveSurgeAI-Website.html#contact" class="btn-secondary">Send A Message</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span>. All rights reserved. — Colonel, US Army (Retired)</div>
+  <a href="WaveSurgeAI-Website.html" class="footer-back">← Return To WaveSurgeAI.com</a>
+</footer>
+
+</body>
+</html>

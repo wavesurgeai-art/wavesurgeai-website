@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SMS Opt-In — WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+  .hero { padding: 140px 60px 60px; background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%); border-bottom: 1px solid rgba(201,168,76,0.15); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); letter-spacing: 3px; margin-bottom: 16px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 17px; color: var(--gray); max-width: 600px; line-height: 1.7; }
+  .content { max-width: 860px; margin: 0 auto; padding: 80px 60px; }
+  .section { margin-bottom: 48px; padding-bottom: 48px; border-bottom: 1px solid rgba(255,255,255,0.06); }
+  .section:last-child { border-bottom: none; }
+  h2 { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); margin-bottom: 16px; }
+  h2 span { color: var(--gold); }
+  p { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+  ul { list-style: none; margin: 16px 0; display: flex; flex-direction: column; gap: 10px; }
+  ul li { font-size: 15px; color: var(--gray); line-height: 1.7; padding-left: 20px; position: relative; }
+  ul li::before { content: '▶'; color: var(--gold); font-size: 9px; position: absolute; left: 0; top: 5px; }
+
+  .opt-in-box {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 48px; margin: 32px 0;
+    position: relative; overflow: hidden;
+  }
+  .opt-in-box::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--steel-blue), var(--gold));
+  }
+  .opt-in-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 20px; }
+  .opt-in-title span { color: var(--gold); }
+
+  .form-group { margin-bottom: 20px; }
+  .form-label { display: block; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+  .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 14px 16px; font-family: 'Lato', sans-serif; font-size: 15px; outline: none; transition: border-color 0.3s; }
+  .form-input:focus { border-color: var(--steel-blue); }
+  .form-input::placeholder { color: rgba(136,146,164,0.6); }
+
+  .checkbox-group { display: flex; align-items: flex-start; gap: 12px; margin: 20px 0; }
+  .checkbox-group input[type="checkbox"] { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--gold); cursor: pointer; }
+  .checkbox-label { font-size: 14px; color: var(--gray); line-height: 1.6; }
+  .checkbox-label a { color: var(--steel-blue); text-decoration: none; }
+  .checkbox-label a:hover { color: var(--gold); }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; width: 100%; text-align: center; margin-top: 8px; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+
+  .disclosure-box {
+    background: var(--light-navy);
+    border-left: 3px solid var(--steel-blue);
+    padding: 24px 28px; margin: 24px 0;
+  }
+  .disclosure-box p { font-size: 14px; margin-bottom: 8px; }
+  .disclosure-box p:last-child { margin-bottom: 0; }
+
+  .keywords-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-top: 24px; }
+  .keyword-item { background: var(--light-navy); padding: 20px 24px; border-left: 3px solid var(--gold); }
+  .keyword { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--gold); margin-bottom: 6px; }
+  .keyword-desc { font-size: 14px; color: var(--gray); line-height: 1.5; }
+
+  .contact-block { background: var(--light-navy); border: 1px solid rgba(74,144,217,0.2); padding: 32px; margin-top: 24px; }
+  .contact-block p { margin-bottom: 8px; }
+  .contact-block a { color: var(--steel-blue); text-decoration: none; }
+  .contact-block a:hover { color: var(--gold); }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); }
+  .footer-copy span { color: var(--gold); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .footer-links a { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-decoration: none; text-transform: uppercase; }
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 40px; }
+    .content { padding: 60px 24px; } .opt-in-box { padding: 32px 24px; }
+    .keywords-grid { grid-template-columns: 1fr; } footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="WaveSurgeAI-Website.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="WaveSurgeAI-Website.html" class="nav-back">← Back To Home</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">SMS Communications</p>
+  <h1 class="hero-title">SMS <span>Opt-In</span></h1>
+  <p class="hero-sub">Sign up to receive text message updates from WaveSurgeAI — including new art releases, service announcements, and HRaaS platform notifications.</p>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <div class="opt-in-box">
+      <div class="opt-in-title">Stay <span>Connected</span></div>
+      <p style="color: var(--gray); margin-bottom: 28px;">Enter your information below to opt in to SMS communications from WaveSurgeAI. Message and data rates may apply. Message frequency varies.</p>
+
+      <div class="form-group">
+        <label class="form-label">First Name</label>
+        <input type="text" class="form-input" placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Last Name</label>
+        <input type="text" class="form-input" placeholder="Your last name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Mobile Phone Number</label>
+        <input type="tel" class="form-input" placeholder="(000) 000-0000">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="your@email.com">
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="sms-consent">
+        <label class="checkbox-label" for="sms-consent">
+          By checking this box I agree to receive recurring automated text messages from WaveSurgeAI at the phone number provided. Message and data rates may apply. Message frequency varies. Reply STOP to opt out at any time. Reply HELP for help. I have read and agree to the <a href="privacy-policy.html">Privacy Policy</a> and <a href="terms-of-service.html">Terms of Service</a>.
+        </label>
+      </div>
+
+      <button class="btn-primary">Subscribe To SMS Updates</button>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>What You'll <span>Receive</span></h2>
+    <p>By opting in to WaveSurgeAI SMS communications you may receive the following types of messages:</p>
+    <ul>
+      <li>New art collection releases and limited edition announcements</li>
+      <li>Special promotions and discounts for subscribers</li>
+      <li>Website design service availability and offers</li>
+      <li>AI After 50 education content and free resource announcements</li>
+      <li>HRaaS platform updates, maintenance notices, and feature releases</li>
+      <li>Order confirmations and download delivery notifications</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>SMS <span>Disclosure</span></h2>
+    <div class="disclosure-box">
+      <p><strong>Program Name:</strong> WaveSurgeAI SMS Updates</p>
+      <p><strong>Message Frequency:</strong> Varies — typically 2-4 messages per month</p>
+      <p><strong>Message & Data Rates:</strong> May apply based on your carrier plan</p>
+      <p><strong>Opt-Out:</strong> Reply STOP to any message to unsubscribe immediately</p>
+      <p><strong>Help:</strong> Reply HELP to any message or email info@wavesurgeai.com</p>
+      <p><strong>Carriers:</strong> Not liable for delayed or undelivered messages</p>
+      <p><strong>Data Sharing:</strong> We do not sell or share your phone number with third parties for marketing</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Opt-Out & Help <span>Keywords</span></h2>
+    <p>You can manage your SMS subscription at any time using these keywords:</p>
+    <div class="keywords-grid">
+      <div class="keyword-item">
+        <div class="keyword">STOP</div>
+        <div class="keyword-desc">Unsubscribe from all WaveSurgeAI SMS messages immediately</div>
+      </div>
+      <div class="keyword-item">
+        <div class="keyword">HELP</div>
+        <div class="keyword-desc">Receive help information and contact details</div>
+      </div>
+      <div class="keyword-item">
+        <div class="keyword">START</div>
+        <div class="keyword-desc">Re-subscribe after previously opting out</div>
+      </div>
+      <div class="keyword-item">
+        <div class="keyword">INFO</div>
+        <div class="keyword-desc">Receive program information and frequency details</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Contact <span>Us</span></h2>
+    <p>For questions about our SMS program or to request removal from our list please contact us directly:</p>
+    <div class="contact-block">
+      <p><strong>WaveSurgeAI — Wave Surge AI LLC</strong></p>
+      <p>Westfield, Indiana, United States</p>
+      <p>Email: <a href="mailto:info@wavesurgeai.com">info@wavesurgeai.com</a></p>
+      <p>Phone: <a href="tel:2707910582">270-791-0582</a></p>
+      <p>Website: <a href="https://wavesurgeai.com">WaveSurgeAI.com</a></p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span> — Wave Surge AI LLC. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="WaveSurgeAI-Website.html">Home</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+    <a href="sms-opt-in.html">SMS Opt-In</a>
+    <a href="WaveSurgeAI-Website.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

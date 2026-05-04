@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Privacy Policy — WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    padding: 20px 60px; display: flex; justify-content: space-between; align-items: center;
+    background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2);
+  }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); }
+  .nav-logo .surge { color: var(--white); }
+  .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero {
+    padding: 140px 60px 60px;
+    background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(48px, 6vw, 80px); letter-spacing: 3px; margin-bottom: 16px; }
+  .hero-title span { color: var(--gold); }
+  .hero-date { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; color: var(--gray); letter-spacing: 1px; }
+
+  .content {
+    max-width: 860px; margin: 0 auto; padding: 80px 60px;
+  }
+
+  .section {
+    margin-bottom: 48px;
+    padding-bottom: 48px;
+    border-bottom: 1px solid rgba(255,255,255,0.06);
+  }
+
+  .section:last-child { border-bottom: none; }
+
+  h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px; letter-spacing: 2px;
+    color: var(--white); margin-bottom: 16px;
+  }
+
+  h2 span { color: var(--gold); }
+
+  p {
+    font-size: 16px; color: var(--gray);
+    line-height: 1.8; margin-bottom: 16px;
+  }
+
+  ul {
+    list-style: none; margin: 16px 0 16px 0;
+    display: flex; flex-direction: column; gap: 10px;
+  }
+
+  ul li {
+    font-size: 15px; color: var(--gray);
+    line-height: 1.7; padding-left: 20px;
+    position: relative;
+  }
+
+  ul li::before {
+    content: '▶';
+    color: var(--gold); font-size: 9px;
+    position: absolute; left: 0; top: 5px;
+  }
+
+  .highlight-box {
+    background: var(--light-navy);
+    border-left: 3px solid var(--gold);
+    padding: 24px 28px; margin: 24px 0;
+  }
+
+  .highlight-box p { margin-bottom: 0; }
+
+  .sms-box {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 32px; margin: 24px 0;
+    position: relative;
+  }
+
+  .sms-box::before {
+    content: 'SMS DISCLOSURE';
+    position: absolute; top: -12px; left: 24px;
+    background: var(--gold); color: var(--deep-navy);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; font-weight: 700;
+    letter-spacing: 2px; padding: 4px 12px;
+  }
+
+  .contact-block {
+    background: var(--light-navy);
+    border: 1px solid rgba(74,144,217,0.2);
+    padding: 32px; margin-top: 24px;
+  }
+
+  .contact-block p { margin-bottom: 8px; }
+  .contact-block a { color: var(--steel-blue); text-decoration: none; }
+  .contact-block a:hover { color: var(--gold); }
+
+  footer {
+    background: rgba(5,12,22,0.98);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 32px 60px; text-align: center;
+  }
+  .footer-copy { font-size: 13px; color: var(--gray); }
+  .footer-copy span { color: var(--gold); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .footer-links a { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-decoration: none; text-transform: uppercase; }
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; }
+    .hero { padding: 120px 24px 40px; }
+    .content { padding: 60px 24px; }
+    footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="WaveSurgeAI-Website.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="WaveSurgeAI-Website.html" class="nav-back">← Back To Home</a>
+</nav>
+
+<div class="hero">
+  <p class="hero-eyebrow">Legal</p>
+  <h1 class="hero-title">Privacy <span>Policy</span></h1>
+  <p class="hero-date">Last Updated: May 1, 2026</p>
+</div>
+
+<div class="content">
+
+  <div class="section">
+    <h2>1. <span>Overview</span></h2>
+    <p>WaveSurgeAI ("we," "us," or "our") is a veteran-owned business founded by a retired US Army Colonel, operating at WaveSurgeAI.com. We are committed to protecting your personal information and your right to privacy.</p>
+    <p>This Privacy Policy applies to all information collected through our website WaveSurgeAI.com, our Etsy shop, our social media platforms, our HRaaS services, and any related services, sales, marketing, or events.</p>
+    <div class="highlight-box">
+      <p>If you have questions or concerns about this policy or our practices, contact us at: <strong>info@wavesurgeai.com</strong> or <strong>270-791-0582</strong>.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>2. Information We <span>Collect</span></h2>
+    <p>We collect information you provide directly to us, including:</p>
+    <ul>
+      <li>Name and email address when you sign up for our free guide or contact us</li>
+      <li>Phone number when you opt in to receive SMS communications</li>
+      <li>Payment information processed securely through Etsy Payments or Square</li>
+      <li>Messages and communications you send to us</li>
+      <li>Business information provided when purchasing HRaaS services</li>
+    </ul>
+    <p>We also collect certain information automatically when you visit our website, including your IP address, browser type, pages visited, and time spent on pages.</p>
+  </div>
+
+  <div class="section">
+    <h2>3. SMS Communications <span>Policy</span></h2>
+    <div class="sms-box">
+      <p>By providing your phone number and opting in to receive SMS messages from WaveSurgeAI, you agree to receive text messages including but not limited to: order updates, promotional offers, service announcements, and HRaaS platform notifications.</p>
+      <br>
+      <p><strong>Message frequency varies.</strong> Message and data rates may apply.</p>
+      <br>
+      <p>To opt out at any time reply <strong>STOP</strong> to any message. To request help reply <strong>HELP</strong> or contact us at info@wavesurgeai.com.</p>
+      <br>
+      <p>We do not sell, rent, or share your phone number with third parties for their marketing purposes. Your phone number is used solely for WaveSurgeAI business communications.</p>
+      <br>
+      <p>Carriers are not liable for delayed or undelivered messages.</p>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>4. How We Use Your <span>Information</span></h2>
+    <p>We use the information we collect to:</p>
+    <ul>
+      <li>Process and fulfill your digital art purchases</li>
+      <li>Deliver your free AI Starter Guide</li>
+      <li>Send you marketing and promotional communications you have opted into</li>
+      <li>Provide and improve our HRaaS services</li>
+      <li>Respond to your inquiries and provide customer support</li>
+      <li>Send SMS communications you have opted into</li>
+      <li>Comply with legal obligations</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>5. Information <span>Sharing</span></h2>
+    <p>We do not sell, trade, or rent your personal information to third parties. We may share your information only in the following circumstances:</p>
+    <ul>
+      <li>With service providers who assist in operating our website and services — including Etsy, Square, Twilio, and Netlify</li>
+      <li>When required by law or to protect our legal rights</li>
+      <li>With your explicit consent</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2>6. Data <span>Security</span></h2>
+    <p>We implement appropriate technical and organizational security measures to protect your personal information against unauthorized access, alteration, disclosure, or destruction. However no internet transmission is 100% secure and we cannot guarantee absolute security.</p>
+    <p>Payment information is processed through Etsy Payments and Square — both PCI-DSS compliant payment processors. We do not store your full payment card information on our systems.</p>
+  </div>
+
+  <div class="section">
+    <h2>7. Your <span>Rights</span></h2>
+    <p>You have the right to:</p>
+    <ul>
+      <li>Access the personal information we hold about you</li>
+      <li>Request correction of inaccurate information</li>
+      <li>Request deletion of your personal information</li>
+      <li>Opt out of marketing communications at any time</li>
+      <li>Opt out of SMS communications by replying STOP</li>
+    </ul>
+    <p>To exercise any of these rights contact us at info@wavesurgeai.com.</p>
+  </div>
+
+  <div class="section">
+    <h2>8. Cookies</h2>
+    <p>Our website may use cookies and similar tracking technologies to improve your browsing experience. You can control cookies through your browser settings. Disabling cookies may affect some functionality of our website.</p>
+  </div>
+
+  <div class="section">
+    <h2>9. Third Party <span>Links</span></h2>
+    <p>Our website contains links to third party websites including our Etsy shop, social media platforms, and partner services. We are not responsible for the privacy practices of these third parties and encourage you to review their privacy policies.</p>
+  </div>
+
+  <div class="section">
+    <h2>10. Changes To This <span>Policy</span></h2>
+    <p>We may update this Privacy Policy from time to time. We will notify you of any changes by posting the new policy on this page with an updated date. Continued use of our services after changes constitutes acceptance of the updated policy.</p>
+  </div>
+
+  <div class="section">
+    <h2>11. Contact <span>Us</span></h2>
+    <p>If you have questions about this Privacy Policy or our privacy practices please contact us:</p>
+    <div class="contact-block">
+      <p><strong>WaveSurgeAI — Wave Surge AI LLC</strong></p>
+      <p>Westfield, Indiana, United States</p>
+      <p>Email: <a href="mailto:info@wavesurgeai.com">info@wavesurgeai.com</a></p>
+      <p>Phone: <a href="tel:2707910582">270-791-0582</a></p>
+      <p>Website: <a href="https://wavesurgeai.com">WaveSurgeAI.com</a></p>
+      <p>— Colonel, US Army (Retired)</p>
+    </div>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span> — Wave Surge AI LLC. All rights reserved.</div>
+  <div class="footer-links">
+    <a href="WaveSurgeAI-Website.html">Home</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+    <a href="sms-opt-in.html">SMS Opt-In</a>
+    <a href="WaveSurgeAI-Website.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -1,0 +1,1842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>WaveSurgeAI — Ride The Wave. Surge Forward.</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628;
+    --navy: #1B3A6B;
+    --steel-blue: #4A90D9;
+    --gold: #C9A84C;
+    --red: #E74C3C;
+    --white: #FFFFFF;
+    --gray: #8892A4;
+    --light-navy: #162040;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: var(--deep-navy);
+    color: var(--white);
+    font-family: 'Lato', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* PARTICLE BACKGROUND */
+  #particles {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    pointer-events: none;
+    z-index: 0;
+    overflow: hidden;
+  }
+
+  .particle {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: var(--gold);
+    border-radius: 50%;
+    animation: float linear infinite;
+    opacity: 0;
+  }
+
+  @keyframes float {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 0.6; }
+    90% { opacity: 0.3; }
+    100% { transform: translateY(-100px) translateX(30px); opacity: 0; }
+  }
+
+  /* NAVIGATION */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 1000;
+    padding: 20px 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: linear-gradient(180deg, rgba(10,22,40,0.98) 0%, rgba(10,22,40,0) 100%);
+    transition: all 0.3s ease;
+  }
+
+  nav.scrolled {
+    background: rgba(10,22,40,0.98);
+    border-bottom: 1px solid rgba(201,168,76,0.2);
+    padding: 14px 60px;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 3px;
+    text-decoration: none;
+  }
+
+  .nav-logo span.wave { color: var(--steel-blue); }
+  .nav-logo span.surge { color: var(--white); }
+  .nav-logo span.ai { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 40px;
+    list-style: none;
+    align-items: center;
+  }
+
+  .nav-links a {
+    color: var(--gray);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  .nav-cta {
+    background: var(--gold) !important;
+    color: var(--deep-navy) !important;
+    padding: 10px 24px !important;
+    border-radius: 2px !important;
+    transition: all 0.3s !important;
+  }
+
+  .nav-cta:hover {
+    background: #E8C55A !important;
+    transform: translateY(-1px);
+  }
+
+  /* SECTIONS */
+  section {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* HERO */
+  #home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 120px 60px 80px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%),
+      radial-gradient(ellipse 60% 40% at 20% 80%, rgba(201,168,76,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 80% 20%, rgba(27,58,107,0.3) 0%, transparent 60%);
+  }
+
+  .hero-line {
+    width: 1px;
+    height: 80px;
+    background: linear-gradient(180deg, transparent, var(--gold), transparent);
+    margin: 0 auto 40px;
+    animation: pulse-line 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse-line {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+
+  .hero-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.3s forwards;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(72px, 10vw, 140px);
+    line-height: 0.9;
+    letter-spacing: 4px;
+    margin-bottom: 8px;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.5s forwards;
+  }
+
+  .hero-title .wave { color: var(--steel-blue); }
+  .hero-title .surge { color: var(--white); }
+  .hero-title .ai-text {
+    color: var(--gold);
+    position: relative;
+    display: inline-block;
+  }
+
+  .hero-title .ai-text::after {
+    content: '';
+    position: absolute;
+    bottom: 8px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--gold);
+    transform: scaleX(0);
+    animation: underline 0.6s ease 1.2s forwards;
+  }
+
+  @keyframes underline {
+    to { transform: scaleX(1); }
+  }
+
+  .hero-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: clamp(16px, 2vw, 22px);
+    font-weight: 600;
+    letter-spacing: 3px;
+    color: var(--steel-blue);
+    margin: 24px 0 16px;
+    text-transform: uppercase;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.7s forwards;
+  }
+
+  .hero-sub {
+    font-family: 'Lato', sans-serif;
+    font-size: 18px;
+    font-weight: 300;
+    color: var(--gray);
+    max-width: 600px;
+    margin: 0 auto 48px;
+    line-height: 1.7;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 0.9s forwards;
+  }
+
+  .hero-buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.8s ease 1.1s forwards;
+  }
+
+  .btn-primary {
+    background: var(--gold);
+    color: var(--deep-navy);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-primary::before {
+    content: none;
+  }
+
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+
+  .btn-secondary {
+    background: transparent;
+    color: var(--white);
+    padding: 16px 40px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(255,255,255,0.3);
+    cursor: pointer;
+    transition: all 0.3s;
+  }
+
+  .btn-secondary:hover {
+    border-color: var(--steel-blue);
+    color: var(--steel-blue);
+    transform: translateY(-2px);
+  }
+
+  .hero-scroll {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fadeIn 1s ease 1.8s forwards;
+  }
+
+  .hero-scroll span {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gray);
+    font-family: 'Montserrat', sans-serif;
+  }
+
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(180deg, var(--gray), transparent);
+    animation: scroll-pulse 1.5s ease-in-out infinite;
+  }
+
+  @keyframes scroll-pulse {
+    0%, 100% { transform: scaleY(1); opacity: 0.5; }
+    50% { transform: scaleY(1.2); opacity: 1; }
+  }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeIn {
+    to { opacity: 1; }
+  }
+
+  /* SECTION HEADERS */
+  .section-header {
+    text-align: center;
+    margin-bottom: 70px;
+  }
+
+  .section-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(48px, 6vw, 80px);
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .section-title span { color: var(--gold); }
+
+  .section-divider {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--steel-blue));
+    margin: 0 auto 20px;
+  }
+
+  .section-sub {
+    font-size: 17px;
+    color: var(--gray);
+    max-width: 560px;
+    margin: 0 auto;
+    line-height: 1.7;
+  }
+
+  /* ABOUT */
+  #about {
+    padding: 120px 60px;
+    background: linear-gradient(180deg, var(--deep-navy) 0%, var(--light-navy) 50%, var(--deep-navy) 100%);
+  }
+
+  .about-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .about-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    background: rgba(201,168,76,0.1);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 8px 20px;
+    margin-bottom: 30px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+
+  .about-badge::before {
+    content: '★';
+    font-size: 12px;
+  }
+
+  .about-heading {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 56px;
+    letter-spacing: 2px;
+    line-height: 1.05;
+    margin-bottom: 24px;
+  }
+
+  .about-heading span { color: var(--gold); }
+
+  .about-text {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.8;
+    margin-bottom: 20px;
+  }
+
+  .about-quote {
+    border-left: 3px solid var(--gold);
+    padding: 16px 24px;
+    margin: 32px 0;
+    background: rgba(201,168,76,0.05);
+    font-style: italic;
+    color: var(--white);
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .about-quote cite {
+    display: block;
+    margin-top: 10px;
+    font-size: 13px;
+    font-style: normal;
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .about-stats {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 40px;
+  }
+
+  .stat {
+    text-align: center;
+    padding: 24px 16px;
+    border: 1px solid rgba(201,168,76,0.15);
+    background: rgba(201,168,76,0.03);
+    transition: all 0.3s;
+  }
+
+  .stat:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.08);
+    transform: translateY(-4px);
+  }
+
+  .stat-number {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 48px;
+    color: var(--gold);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-top: 6px;
+  }
+
+  .about-visual {
+    position: relative;
+  }
+
+  .about-card {
+    background: var(--navy);
+    border: 1px solid rgba(74,144,217,0.2);
+    padding: 48px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .about-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 3px;
+    background: linear-gradient(90deg, var(--gold), var(--steel-blue));
+  }
+
+  .about-card-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 36px;
+    letter-spacing: 2px;
+    margin-bottom: 24px;
+    color: var(--white);
+  }
+
+  .about-card-title span { color: var(--gold); }
+
+  .about-values {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .about-values li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--white);
+    letter-spacing: 0.5px;
+  }
+
+  .about-values li::before {
+    content: '▶';
+    color: var(--gold);
+    font-size: 10px;
+    flex-shrink: 0;
+  }
+
+  .about-card-footer {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--steel-blue);
+  }
+
+  /* AI AFTER 50 */
+  #ai-after-50 {
+    padding: 120px 60px;
+  }
+
+  .features-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+
+  .feature-card {
+    background: var(--light-navy);
+    padding: 48px 36px;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.4s;
+    cursor: default;
+  }
+
+  .feature-card::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%; height: 2px;
+    background: linear-gradient(90deg, var(--steel-blue), var(--gold));
+    transform: scaleX(0);
+    transition: transform 0.4s;
+  }
+
+  .feature-card:hover {
+    background: rgba(27,58,107,0.8);
+    transform: translateY(-4px);
+  }
+
+  .feature-card:hover::after { transform: scaleX(1); }
+
+  .feature-icon {
+    font-size: 36px;
+    margin-bottom: 24px;
+    display: block;
+  }
+
+  .feature-number {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 64px;
+    color: rgba(201,168,76,0.06);
+    letter-spacing: 2px;
+    line-height: 1;
+  }
+
+  .feature-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 28px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    color: var(--white);
+  }
+
+  .feature-text {
+    font-size: 15px;
+    color: var(--gray);
+    line-height: 1.7;
+  }
+
+  .feature-tag {
+    display: inline-block;
+    margin-top: 20px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--steel-blue);
+    border: 1px solid rgba(74,144,217,0.3);
+    padding: 4px 12px;
+  }
+
+  /* ART GALLERY */
+  #art-gallery {
+    padding: 120px 60px;
+    background: linear-gradient(180deg, var(--deep-navy) 0%, var(--light-navy) 50%, var(--deep-navy) 100%);
+  }
+
+  .gallery-grid {
+    max-width: 1100px;
+    margin: 0 auto 60px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 3px;
+  }
+
+  .gallery-item {
+    aspect-ratio: 4/5;
+    background: var(--navy);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+
+  .gallery-item:first-child {
+    grid-column: span 2;
+    aspect-ratio: 8/5;
+  }
+
+  .gallery-placeholder {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    background: linear-gradient(135deg, var(--navy) 0%, var(--light-navy) 100%);
+    transition: all 0.4s;
+  }
+
+  .gallery-item:hover .gallery-placeholder {
+    background: linear-gradient(135deg, var(--light-navy) 0%, var(--navy) 100%);
+  }
+
+  .gallery-placeholder-icon {
+    font-size: 32px;
+    opacity: 0.4;
+  }
+
+  .gallery-placeholder-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+  }
+
+  .gallery-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgba(10,22,40,0.95) 100%);
+    opacity: 0;
+    transition: opacity 0.4s;
+    display: flex;
+    align-items: flex-end;
+    padding: 24px;
+  }
+
+  .gallery-item:hover .gallery-overlay { opacity: 1; }
+
+  .gallery-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 2px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .gallery-info p {
+    font-size: 13px;
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+  }
+
+  .gallery-cta {
+    text-align: center;
+  }
+
+  /* FREE GUIDE */
+  #free-guide {
+    padding: 120px 60px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guide-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse 70% 80% at 50% 50%, rgba(74,144,217,0.06) 0%, transparent 70%);
+  }
+
+  .guide-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: center;
+    position: relative;
+  }
+
+  .guide-card {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.2);
+    padding: 64px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .guide-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue));
+  }
+
+  .guide-badge {
+    display: inline-block;
+    background: rgba(201,168,76,0.15);
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    padding: 8px 20px;
+    margin-bottom: 32px;
+  }
+
+  .guide-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 60px;
+    letter-spacing: 3px;
+    line-height: 1;
+    margin-bottom: 20px;
+  }
+
+  .guide-title span { color: var(--gold); }
+
+  .guide-text {
+    font-size: 17px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .guide-includes {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+    margin-bottom: 40px;
+    text-align: left;
+  }
+
+  .guide-include-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--white);
+  }
+
+  .guide-include-item::before {
+    content: '✓';
+    color: var(--gold);
+    font-size: 14px;
+    flex-shrink: 0;
+  }
+
+  .guide-form {
+    display: flex;
+    gap: 0;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  .guide-input {
+    flex: 1;
+    background: rgba(255,255,255,0.05);
+    border: 1px solid rgba(255,255,255,0.15);
+    border-right: none;
+    color: var(--white);
+    padding: 16px 20px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+  }
+
+  .guide-input:focus { border-color: var(--steel-blue); }
+  .guide-input::placeholder { color: var(--gray); }
+
+  .guide-submit {
+    background: var(--gold);
+    color: var(--deep-navy);
+    border: none;
+    padding: 16px 28px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    white-space: nowrap;
+  }
+
+  .guide-submit:hover { background: #E8C55A; }
+
+  /* CONTACT */
+  #contact {
+    padding: 120px 60px;
+    background: var(--light-navy);
+  }
+
+  .contact-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr;
+    gap: 80px;
+    align-items: start;
+  }
+
+  .contact-info h3 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 42px;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+  }
+
+  .contact-info h3 span { color: var(--gold); }
+
+  .contact-info p {
+    font-size: 16px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+
+  .contact-socials {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .social-link {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    text-decoration: none;
+    color: var(--white);
+    transition: all 0.3s;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 1px;
+  }
+
+  .social-link:hover {
+    border-color: var(--gold);
+    background: rgba(201,168,76,0.05);
+    transform: translateX(4px);
+  }
+
+  .social-platform {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    min-width: 80px;
+  }
+
+  .contact-form-wrapper {
+    background: var(--deep-navy);
+    border: 1px solid rgba(74,144,217,0.15);
+    padding: 48px;
+    position: relative;
+  }
+
+  .contact-form-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 2px;
+    background: linear-gradient(90deg, var(--steel-blue), var(--gold));
+  }
+
+  .form-group {
+    margin-bottom: 24px;
+  }
+
+  .form-label {
+    display: block;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--gray);
+    margin-bottom: 8px;
+  }
+
+  .form-input, .form-textarea {
+    width: 100%;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.1);
+    color: var(--white);
+    padding: 14px 16px;
+    font-family: 'Lato', sans-serif;
+    font-size: 15px;
+    outline: none;
+    transition: border-color 0.3s;
+    resize: none;
+  }
+
+  .form-input:focus, .form-textarea:focus {
+    border-color: var(--steel-blue);
+    background: rgba(74,144,217,0.04);
+  }
+
+  .form-input::placeholder, .form-textarea::placeholder { color: rgba(136,146,164,0.6); }
+
+  /* FOOTER */
+  footer {
+    background: rgba(5,12,22,0.98);
+    border-top: 1px solid rgba(201,168,76,0.15);
+    padding: 60px;
+  }
+
+  .footer-grid {
+    max-width: 1100px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+
+  .footer-brand-name {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 32px;
+    letter-spacing: 3px;
+    margin-bottom: 16px;
+  }
+
+  .footer-brand-name .wave { color: var(--steel-blue); }
+  .footer-brand-name .surge { color: var(--white); }
+  .footer-brand-name .ai { color: var(--gold); }
+
+  .footer-tagline {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    color: var(--steel-blue);
+    text-transform: uppercase;
+    margin-bottom: 20px;
+  }
+
+  .footer-desc {
+    font-size: 14px;
+    color: var(--gray);
+    line-height: 1.7;
+    margin-bottom: 24px;
+  }
+
+  .footer-attribution {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1px;
+    color: var(--gold);
+  }
+
+  .footer-col-title {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--white);
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+
+  .footer-links {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .footer-links a {
+    text-decoration: none;
+    color: var(--gray);
+    font-size: 14px;
+    transition: color 0.3s;
+    font-family: 'Lato', sans-serif;
+  }
+
+  .footer-links a:hover { color: var(--gold); }
+
+  .footer-bottom {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.06);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+  }
+
+  .footer-copy {
+    font-size: 13px;
+    color: var(--gray);
+    font-family: 'Lato', sans-serif;
+  }
+
+  .footer-copy span { color: var(--gold); }
+
+  .footer-legal {
+    display: flex;
+    gap: 24px;
+  }
+
+  .footer-legal a {
+    font-size: 12px;
+    color: var(--gray);
+    text-decoration: none;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: color 0.3s;
+  }
+
+  .footer-legal a:hover { color: var(--gold); }
+
+  /* SCROLL REVEAL */
+  .reveal {
+    opacity: 0;
+    transform: translateY(40px);
+    transition: all 0.7s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  /* GOLD SEPARATOR */
+  .gold-separator {
+    max-width: 1100px;
+    margin: 0 auto;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    opacity: 0.3;
+  }
+
+  /* HAMBURGER MENU */
+  .hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 1100;
+  }
+
+  .hamburger span {
+    display: block;
+    width: 26px;
+    height: 2px;
+    background: var(--white);
+    transition: all 0.3s;
+  }
+
+  .hamburger.active span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+  }
+
+  .hamburger.active span:nth-child(2) {
+    opacity: 0;
+  }
+
+  .hamburger.active span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+  }
+
+  /* MOBILE STYLES */
+  @media (max-width: 900px) {
+
+    nav {
+      padding: 16px 24px;
+    }
+
+    nav.scrolled {
+      padding: 12px 24px;
+    }
+
+    .hamburger {
+      display: flex;
+    }
+
+    .nav-links {
+      position: fixed;
+      top: 0; right: -100%;
+      width: 280px;
+      height: 100vh;
+      background: rgba(10,22,40,0.99);
+      border-left: 1px solid rgba(201,168,76,0.2);
+      flex-direction: column;
+      justify-content: center;
+      align-items: flex-start;
+      padding: 60px 40px;
+      gap: 32px;
+      transition: right 0.4s ease;
+      z-index: 1050;
+    }
+
+    .nav-links.open {
+      right: 0;
+    }
+
+    .nav-links a {
+      font-size: 15px;
+      color: var(--white);
+    }
+
+    .nav-cta {
+      margin-top: 16px;
+      padding: 12px 28px !important;
+    }
+
+    /* HERO */
+    #home {
+      padding: 100px 24px 80px;
+    }
+
+    .hero-buttons {
+      flex-direction: column;
+      align-items: center;
+    }
+
+    .btn-primary, .btn-secondary {
+      width: 100%;
+      max-width: 320px;
+      text-align: center;
+    }
+
+    /* ABOUT */
+    #about {
+      padding: 80px 24px;
+    }
+
+    .about-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .about-stats {
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+    }
+
+    .stat-number {
+      font-size: 36px;
+    }
+
+    .about-heading {
+      font-size: 42px;
+    }
+
+    /* AI AFTER 50 */
+    #ai-after-50 {
+      padding: 80px 24px;
+    }
+
+    .features-grid {
+      grid-template-columns: 1fr;
+      gap: 2px;
+    }
+
+    /* ART GALLERY */
+    #art-gallery {
+      padding: 80px 24px;
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 3px;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 2;
+      aspect-ratio: 16/9;
+    }
+
+    /* FREE GUIDE */
+    #free-guide {
+      padding: 80px 24px;
+    }
+
+    .guide-card {
+      padding: 36px 24px;
+    }
+
+    .guide-title {
+      font-size: 44px;
+    }
+
+    .guide-includes {
+      grid-template-columns: 1fr;
+    }
+
+    .guide-form {
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .guide-input {
+      border-right: 1px solid rgba(255,255,255,0.15);
+      border-bottom: none;
+    }
+
+    .guide-submit {
+      padding: 16px;
+      width: 100%;
+    }
+
+    /* CONTACT */
+    #contact {
+      padding: 80px 24px;
+    }
+
+    .contact-grid {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+
+    .contact-form-wrapper {
+      padding: 32px 24px;
+    }
+
+    /* FOOTER */
+    footer {
+      padding: 60px 24px 40px;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+    }
+
+    .footer-grid > div:first-child {
+      grid-column: span 2;
+    }
+
+    .footer-bottom {
+      flex-direction: column;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 480px) {
+
+    .about-stats {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .gallery-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .gallery-item:first-child {
+      grid-column: span 1;
+      aspect-ratio: 4/5;
+    }
+
+    .footer-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .footer-grid > div:first-child {
+      grid-column: span 1;
+    }
+
+    .footer-legal {
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    nav {
+      padding: 14px 20px;
+    }
+
+    .section-title {
+      font-size: 44px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<!-- Particle Background -->
+<div id="particles"></div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#home" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <div class="hamburger" id="hamburger">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <ul class="nav-links" id="nav-links">
+    <li><a href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#website-design">Website Design</a></li>
+    <li><a href="#art-gallery">Art Gallery</a></li>
+    <li><a href="#ai-after-50">AI After 50</a></li>
+    <li><a href="#free-guide">Free Guide</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#free-guide" class="nav-cta">Get Free Guide</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero-bg"></div>
+  <div>
+    <div class="hero-line"></div>
+    <p class="hero-eyebrow">Web Design · AI Art · Digital Education</p>
+    <h1 class="hero-title">
+      <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai-text">AI</span>
+    </h1>
+    <p class="hero-tagline">Ride The Wave. Surge Forward.</p>
+    <p class="hero-sub">Professional web design, premium AI-generated art, and digital education for the generation that served, led, and never stopped moving forward.</p>
+    <div class="hero-buttons">
+      <a href="#website-design" class="btn-primary">Website Design</a>
+      <a href="#art-gallery" class="btn-secondary">Shop Art Prints</a>
+      <a href="#free-guide" class="btn-secondary">Get Free AI Guide</a>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-grid">
+    <div class="reveal">
+      <div class="about-badge">Colonel, US Army (Retired)</div>
+      <h2 class="about-heading">27 Years.<br>One <span>Mission.</span><br>New Battlefield.</h2>
+      <p class="about-text">After 27 years of service, I didn't stop. I surged forward into the next mission: harnessing the power of AI to create stunning digital art, build professional websites, and teach others how to ride the wave of this technology revolution.</p>
+      <p class="about-text">WaveSurgeAI was born from the same discipline, precision, and commitment that defined every mission I led in uniform. Now that precision builds something new — art that honors service, websites that elevate brands, and education that empowers the 50+ generation.</p>
+      <blockquote class="about-quote">
+        "Leadership isn't a title. It's a standard you set every single day."
+        <cite>— Colonel, US Army (Retired)</cite>
+      </blockquote>
+      <div class="about-stats">
+        <div class="stat">
+          <div class="stat-number">27</div>
+          <div class="stat-label">Years Served</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">11+</div>
+          <div class="stat-label">Art Pieces</div>
+        </div>
+        <div class="stat">
+          <div class="stat-number">3</div>
+          <div class="stat-label">Services</div>
+        </div>
+      </div>
+    </div>
+    <div class="about-visual reveal">
+      <div class="about-card">
+        <h3 class="about-card-title">The <span>Colonel</span> Advantage</h3>
+        <ul class="about-values">
+          <li>Authentic military knowledge — no guessing</li>
+          <li>27 years of precision and discipline</li>
+          <li>Original quotes no other creator owns</li>
+          <li>Professional websites built with military precision</li>
+          <li>Deep connection to the veteran community</li>
+          <li>Teaching AI with patience and clarity</li>
+          <li>Built for the 50+ generation — by one of them</li>
+        </ul>
+        <div class="about-card-footer">@WaveSurgeAI — All Platforms</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-separator"></div>
+
+<!-- WEBSITE DESIGN -->
+<section id="website-design" style="padding: 120px 60px; background: linear-gradient(180deg, var(--deep-navy) 0%, var(--light-navy) 50%, var(--deep-navy) 100%);">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Professional Services</p>
+    <h2 class="section-title">Website <span>Design</span></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Custom AI-assisted websites built with military precision — clean, professional, and built to convert. Designed for businesses, creators, and veterans.</p>
+  </div>
+  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;" class="reveal">
+
+    <div class="feature-card" style="cursor:pointer;" onclick="window.location='landing-pages.html'">
+      <span class="feature-icon">🎯</span>
+      <span class="feature-number">01</span>
+      <h3 class="feature-title">Landing Pages</h3>
+      <p class="feature-text">Single page websites designed to capture leads, sell products, or showcase your brand. Fast, mobile-ready, and built to convert visitors into customers.</p>
+      <span class="feature-tag">Starting at $297 — Learn More →</span>
+    </div>
+
+    <div class="feature-card" style="cursor:pointer;" onclick="window.location='full-brand-sites.html'">
+      <span class="feature-icon">🌐</span>
+      <span class="feature-number">02</span>
+      <h3 class="feature-title">Full Brand Sites</h3>
+      <p class="feature-text">Multi-page professional websites with your full brand identity — Home, About, Services, Gallery, Contact. Everything your business needs to look credible online.</p>
+      <span class="feature-tag">Starting at $597 — Learn More →</span>
+    </div>
+
+    <div class="feature-card" style="cursor:pointer;" onclick="window.location='veteran-military.html'">
+      <span class="feature-icon">🛡️</span>
+      <span class="feature-number">03</span>
+      <h3 class="feature-title">Veteran & Military</h3>
+      <p class="feature-text">Specialized websites for veteran-owned businesses, military organizations, and patriotic brands. Built by a Colonel who understands your mission and your audience.</p>
+      <span class="feature-tag">Special Pricing Available — Learn More →</span>
+    </div>
+
+    <div class="feature-card" style="cursor:pointer;" onclick="window.location='social-media-marketing.html'">
+      <span class="feature-icon">📱</span>
+      <span class="feature-number">04</span>
+      <h3 class="feature-title">Social Media Marketing</h3>
+      <p class="feature-text">Full campaign strategy, content creation, and platform management — posts, graphics, and copy built to grow your audience and drive results.</p>
+      <span class="feature-tag">Custom Pricing — Learn More →</span>
+    </div>
+
+  </div>
+  <div style="text-align: center; margin-top: 60px;" class="reveal">
+    <p style="font-family: 'Montserrat', sans-serif; font-size: 14px; color: var(--gray); margin-bottom: 32px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7;">Every site is built with the same precision and attention to detail I brought to every mission — the standard is excellence, and that never changes.</p>
+    <a href="#contact" class="btn-primary">Discuss Your Project</a>
+  </div>
+</section>
+
+<div class="gold-separator"></div>
+
+<!-- ART GALLERY -->
+<section id="art-gallery">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Digital Art Collection</p>
+    <h2 class="section-title">The <span>Gallery</span></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">Premium AI-generated art prints — military tribute, motivational, abstract and futuristic. Instant download. Print at any size.</p>
+  </div>
+  <div class="gallery-grid reveal">
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">🦅</span>
+        <span class="gallery-placeholder-text">Eagle & Flag</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Eagle & Flag</h3>
+          <p>Military/Patriotic — $6.99</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">🥾</span>
+        <span class="gallery-placeholder-text">Military Boots Tribute</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Military Boots Tribute</h3>
+          <p>Military/Patriotic — $6.99</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">🎖️</span>
+        <span class="gallery-placeholder-text">Soldier Silhouette</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Soldier Silhouette</h3>
+          <p>Military/Patriotic — $6.99</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">🌊</span>
+        <span class="gallery-placeholder-text">Ocean Wave — The Surge</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Ocean Wave — The Surge</h3>
+          <p>Motivational — $5.99</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">⛰️</span>
+        <span class="gallery-placeholder-text">Mountain Summit</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Mountain Summit</h3>
+          <p>Motivational — $5.99</p>
+        </div>
+      </div>
+    </div>
+    <div class="gallery-item">
+      <div class="gallery-placeholder">
+        <span class="gallery-placeholder-icon">🧠</span>
+        <span class="gallery-placeholder-text">Neural Network</span>
+      </div>
+      <div class="gallery-overlay">
+        <div class="gallery-info">
+          <h3>Neural Network</h3>
+          <p>Abstract/Futuristic — $5.99</p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="gallery-cta reveal">
+    <a href="https://etsy.com/shop/WaveSurgeAI" target="_blank" class="btn-primary">View Full Collection on Etsy</a>
+  </div>
+</section>
+
+<div class="gold-separator"></div>
+
+<!-- AI AFTER 50 -->
+<section id="ai-after-50" style="padding: 120px 60px;">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Digital Education</p>
+    <h2 class="section-title">AI <span>After 50</span></h2>
+    <div class="section-divider"></div>
+    <p class="section-sub">You don't need to be 25 or have a computer science degree. You just need someone to show you how — simply, clearly, and without the jargon.</p>
+  </div>
+  <div class="features-grid">
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌐</span>
+      <span class="feature-number">01</span>
+      <h3 class="feature-title">Web Design</h3>
+      <p class="feature-text">Custom AI-assisted websites built with military precision — clean, professional, and built to convert for businesses, creators, and veterans.</p>
+      <span class="feature-tag">Professional Service</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🎨</span>
+      <span class="feature-number">02</span>
+      <h3 class="feature-title">AI Generated Art</h3>
+      <p class="feature-text">Premium AI-generated digital art prints — military tribute, motivational, abstract and futuristic. Instant download, print at any size.</p>
+      <span class="feature-tag">Digital Art Shop</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🤖</span>
+      <span class="feature-number">03</span>
+      <h3 class="feature-title">AI Education</h3>
+      <p class="feature-text">Plain English explanations of ChatGPT, Midjourney, and the tools reshaping the world — starting from absolute zero, no assumptions.</p>
+      <span class="feature-tag">AI After 50</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">💰</span>
+      <span class="feature-number">04</span>
+      <h3 class="feature-title">Earn With AI</h3>
+      <p class="feature-text">Real strategies for generating income using AI tools — from selling digital art on Etsy to building online education content.</p>
+      <span class="feature-tag">Income Focused</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🛡️</span>
+      <span class="feature-number">05</span>
+      <h3 class="feature-title">Stay Safe</h3>
+      <p class="feature-text">Know what AI scams look like, how to protect your information, and how to use these tools with confidence and without risk.</p>
+      <span class="feature-tag">Essential Knowledge</span>
+    </div>
+    <div class="feature-card reveal">
+      <span class="feature-icon">🌊</span>
+      <span class="feature-number">06</span>
+      <h3 class="feature-title">Community</h3>
+      <p class="feature-text">Join a growing community of 50+ learners riding the AI wave together — sharing wins, asking questions, and surging forward.</p>
+      <span class="feature-tag">Growing Community</span>
+    </div>
+  </div>
+</section>
+
+<div class="gold-separator"></div>
+
+<!-- FREE GUIDE -->
+<section id="free-guide">
+  <div class="guide-bg"></div>
+  <div class="guide-container">
+    <div class="guide-card reveal">
+      <span class="guide-badge">100% Free — No Credit Card</span>
+      <h2 class="guide-title">Free <span>AI Starter</span> Guide</h2>
+      <p class="guide-text">The exact AI tools I use every day — explained simply, clearly, and without the tech jargon. Built specifically for the 50+ generation who are ready to surge forward.</p>
+      <div class="guide-includes">
+        <div class="guide-include-item">The 5 AI tools you need first</div>
+        <div class="guide-include-item">How to use ChatGPT today</div>
+        <div class="guide-include-item">Create AI art in 10 minutes</div>
+        <div class="guide-include-item">Avoid the top 3 AI scams</div>
+        <div class="guide-include-item">Make money with AI art</div>
+        <div class="guide-include-item">Step-by-step beginner roadmap</div>
+      </div>
+      <div class="guide-form">
+        <input type="email" class="guide-input" placeholder="Your email address">
+        <button class="guide-submit">Get It Free</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="gold-separator"></div>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-header reveal">
+    <p class="section-eyebrow">Get In Touch</p>
+    <h2 class="section-title">Contact <span>WaveSurgeAI</span></h2>
+    <div class="section-divider"></div>
+  </div>
+  <div class="contact-grid">
+    <div class="reveal">
+      <div class="contact-info">
+        <h3>Connect With <span>The Colonel</span></h3>
+        <p>Questions about the art collection, education content, or just want to say hello — reach out. Every message gets a response!</p>
+      </div>
+      <div class="contact-socials">
+        <a href="https://tiktok.com/@WaveSurgeAI" target="_blank" class="social-link">
+          <span class="social-platform">TikTok</span>
+          @WaveSurgeAI
+        </a>
+        <a href="https://instagram.com/WaveSurgeAI" target="_blank" class="social-link">
+          <span class="social-platform">Instagram</span>
+          @WaveSurgeAI
+        </a>
+        <a href="https://youtube.com/@WaveSurgeAI" target="_blank" class="social-link">
+          <span class="social-platform">YouTube</span>
+          @WaveSurgeAI
+        </a>
+        <a href="https://pinterest.com/WaveSurgeAI" target="_blank" class="social-link">
+          <span class="social-platform">Pinterest</span>
+          WaveSurgeAI
+        </a>
+        <a href="https://etsy.com/shop/WaveSurgeAI" target="_blank" class="social-link">
+          <span class="social-platform">Etsy Shop</span>
+          WaveSurgeAI
+        </a>
+      </div>
+    </div>
+    <div class="contact-form-wrapper reveal">
+      <div class="form-group">
+        <label class="form-label">Your Name</label>
+        <input type="text" class="form-input" placeholder="First and last name">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Email Address</label>
+        <input type="email" class="form-input" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Message</label>
+        <textarea class="form-textarea" rows="5" placeholder="How can WaveSurgeAI help you?"></textarea>
+      </div>
+      <button class="btn-primary" style="width:100%">Send Message</button>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-name">
+        <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+      </div>
+      <div class="footer-tagline">Ride The Wave. Surge Forward.</div>
+      <p class="footer-desc">Professional web design, premium AI-generated digital art, and education for the generation that served, led, and never stopped moving forward. Founded by a retired US Army Colonel.</p>
+      <div class="footer-attribution">— Colonel, US Army (Retired)</div>
+    </div>
+    <div>
+      <div class="footer-col-title">Navigation</div>
+      <ul class="footer-links">
+        <li><a href="#home">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#website-design">Website Design</a></li>
+        <li><a href="#art-gallery">Art Gallery</a></li>
+        <li><a href="#ai-after-50">AI After 50</a></li>
+        <li><a href="#free-guide">Free Guide</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Art Shop</div>
+      <ul class="footer-links">
+        <li><a href="#">Military & Patriotic</a></li>
+        <li><a href="#">Motivational Prints</a></li>
+        <li><a href="#">Abstract & Futuristic</a></li>
+        <li><a href="#">Phone Wallpapers</a></li>
+        <li><a href="#">Bundle Packs</a></li>
+        <li><a href="#">View All on Etsy</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="footer-col-title">Connect</div>
+      <ul class="footer-links">
+        <li><a href="https://tiktok.com/@WaveSurgeAI" target="_blank">TikTok</a></li>
+        <li><a href="https://instagram.com/WaveSurgeAI" target="_blank">Instagram</a></li>
+        <li><a href="https://youtube.com/@WaveSurgeAI" target="_blank">YouTube</a></li>
+        <li><a href="https://pinterest.com/WaveSurgeAI" target="_blank">Pinterest</a></li>
+        <li><a href="https://etsy.com/shop/WaveSurgeAI" target="_blank">Etsy Shop</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2026 <span>WaveSurgeAI</span>. All rights reserved. AI-generated art disclosed per Etsy policy.</div>
+    <div class="footer-legal">
+      <a href="privacy-policy.html">Privacy Policy</a>
+      <a href="terms-of-service.html">Terms of Service</a>
+      <a href="sms-opt-in.html">SMS Opt-In</a>
+      <a href="#">AI Disclosure</a>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 40; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.left = Math.random() * 100 + '%';
+    p.style.animationDuration = (8 + Math.random() * 12) + 's';
+    p.style.animationDelay = (Math.random() * 10) + 's';
+    p.style.width = p.style.height = (1 + Math.random() * 2) + 'px';
+    if (Math.random() > 0.6) {
+      p.style.background = '#4A90D9';
+    }
+    container.appendChild(p);
+  }
+
+  // Navbar scroll
+  window.addEventListener('scroll', () => {
+    const nav = document.getElementById('navbar');
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // Scroll reveal
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+
+  // Hamburger menu
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('nav-links');
+
+  hamburger.addEventListener('click', () => {
+    hamburger.classList.toggle('active');
+    navLinks.classList.toggle('open');
+  });
+
+  // Close menu when link clicked
+  navLinks.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('open');
+    });
+  });
+
+  // Smooth nav links
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      e.preventDefault();
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+</script>
+</body>
+</html>
