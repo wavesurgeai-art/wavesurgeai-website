@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HRaaS — Human Resources as a Service | WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero {
+    min-height: 55vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 140px 60px 80px;
+    background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 8vw, 100px); letter-spacing: 4px; line-height: 1; margin-bottom: 16px; }
+  .hero-title span { color: var(--gold); }
+  .hero-subtitle { font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: 600; color: var(--steel-blue); letter-spacing: 2px; text-transform: uppercase; margin-bottom: 24px; }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+  .hero-badge { display: inline-block; background: rgba(201,168,76,0.1); border: 1px solid var(--gold); padding: 10px 24px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 32px; }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 600px; }
+
+  .services-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin-top: 48px; }
+  .service-card { background: var(--light-navy); padding: 40px 36px; position: relative; transition: all 0.4s; border-bottom: 3px solid transparent; }
+  .service-card:hover { background: var(--navy); border-bottom-color: var(--gold); transform: translateY(-4px); }
+  .service-icon { font-size: 36px; margin-bottom: 20px; display: block; }
+  .service-number { position: absolute; top: 20px; right: 24px; font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: rgba(201,168,76,0.06); letter-spacing: 2px; line-height: 1; }
+  .service-title { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; color: var(--white); margin-bottom: 12px; }
+  .service-text { font-size: 15px; color: var(--gray); line-height: 1.7; margin-bottom: 16px; }
+  .service-features { list-style: none; display: flex; flex-direction: column; gap: 8px; }
+  .service-features li { font-size: 13px; color: var(--gray); padding-left: 16px; position: relative; line-height: 1.5; }
+  .service-features li::before { content: '✓'; color: var(--gold); font-size: 11px; position: absolute; left: 0; top: 1px; }
+
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .who-card { background: var(--light-navy); padding: 36px; text-align: center; transition: all 0.3s; border-top: 3px solid var(--steel-blue); }
+  .who-card:hover { background: var(--navy); transform: translateY(-4px); }
+  .who-icon { font-size: 36px; margin-bottom: 16px; display: block; }
+  .who-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--white); margin-bottom: 10px; }
+  .who-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+  .why-block { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; margin-top: 48px; position: relative; overflow: hidden; }
+  .why-block::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue)); }
+  .why-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: 32px; }
+  .why-item { text-align: center; }
+  .why-number { font-family: 'Bebas Neue', sans-serif; font-size: 56px; color: var(--gold); letter-spacing: 2px; line-height: 1; margin-bottom: 8px; }
+  .why-label { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 8px; }
+  .why-text { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .pricing-card { background: var(--light-navy); padding: 40px 32px; position: relative; transition: all 0.3s; }
+  .pricing-card.featured { background: var(--navy); border: 1px solid rgba(201,168,76,0.3); }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-badge { display: inline-block; background: var(--gold); color: var(--deep-navy); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px; }
+  .pricing-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .pricing-price { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--gold); letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+  .pricing-period { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
+  .pricing-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px; }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray); line-height: 1.5; }
+  .pricing-features li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+  .contact-strip { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; text-align: center; position: relative; overflow: hidden; margin: 0 60px 100px; }
+  .contact-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue)); }
+  .contact-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .contact-strip h2 span { color: var(--gold); }
+  .contact-strip p { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .contact-methods { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-method { text-align: center; }
+  .contact-method-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-method-value { font-size: 15px; color: var(--white); text-decoration: none; transition: color 0.3s; display: block; }
+  .contact-method-value:hover { color: var(--gold); }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); } .footer-copy span { color: var(--gold); }
+  .footer-back { display: inline-block; margin-top: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-blue); text-decoration: none; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
+    .services-grid { grid-template-columns: 1fr; } .who-grid { grid-template-columns: 1fr; }
+    .why-grid { grid-template-columns: 1fr; } .pricing-grid { grid-template-columns: 1fr; }
+    .why-block { padding: 40px 24px; } .contact-strip { margin: 0 24px 60px; padding: 40px 24px; }
+    .contact-methods { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="index.html" class="nav-back">← Back To Home</a>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-badge">Now Available — Small Business HR Solutions</div>
+    <p class="hero-eyebrow">Human Resources as a Service</p>
+    <h1 class="hero-title">HR<span>aaS</span></h1>
+    <p class="hero-subtitle">Human Resources as a Service</p>
+    <p class="hero-sub">Complete HR solutions for small businesses — document management, employee onboarding, payroll administration, and compliance — all delivered with military precision by WaveSurgeAI.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="venuehr.html" class="btn-primary">Access VenueHR Platform</a>
+      <a href="#services" class="btn-secondary">What's Included</a>
+    </div>
+  </div>
+</div>
+
+<section id="services">
+  <p class="section-eyebrow">Complete HR Solutions</p>
+  <h2 class="section-title">Everything Your Business <span>Needs</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">From day one hiring paperwork to ongoing compliance — WaveSurgeAI HRaaS handles your human resources so you can focus on your mission.</p>
+  <div class="services-grid">
+
+    <div class="service-card">
+      <span class="service-icon">📁</span>
+      <span class="service-number">01</span>
+      <div class="service-title">HR Document Management</div>
+      <p class="service-text">Complete library of HR templates, forms, and documents — customized for your business and always up to date.</p>
+      <ul class="service-features">
+        <li>Employee handbooks and policy documents</li>
+        <li>Job descriptions and offer letter templates</li>
+        <li>Performance review forms and templates</li>
+        <li>Disciplinary action documentation</li>
+        <li>Termination and separation paperwork</li>
+        <li>Secure digital document storage</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">🚀</span>
+      <span class="service-number">02</span>
+      <div class="service-title">Employee Onboarding</div>
+      <p class="service-text">Automated onboarding workflows that get new hires productive faster — with zero paperwork headaches.</p>
+      <ul class="service-features">
+        <li>Digital onboarding checklists and workflows</li>
+        <li>New hire paperwork automation — I-9, W-4, direct deposit</li>
+        <li>Benefits enrollment guidance</li>
+        <li>Equipment and access provisioning tracking</li>
+        <li>30-60-90 day check-in templates</li>
+        <li>New hire orientation materials</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">💰</span>
+      <span class="service-number">03</span>
+      <div class="service-title">Payroll & Benefits</div>
+      <p class="service-text">Payroll administration support and benefits guidance — ensuring your team gets paid correctly and on time.</p>
+      <ul class="service-features">
+        <li>Payroll processing support and oversight</li>
+        <li>Tax filing guidance and documentation</li>
+        <li>Benefits administration coordination</li>
+        <li>PTO and leave tracking</li>
+        <li>Compensation benchmarking guidance</li>
+        <li>Year-end reporting support</li>
+      </ul>
+    </div>
+
+    <div class="service-card">
+      <span class="service-icon">⚖️</span>
+      <span class="service-number">04</span>
+      <div class="service-title">Compliance & Policy</div>
+      <p class="service-text">Stay compliant with federal and state employment laws — policies built to protect your business and your employees.</p>
+      <ul class="service-features">
+        <li>Employee handbook compliance review</li>
+        <li>Federal and state law compliance monitoring</li>
+        <li>EEOC and ADA policy guidance</li>
+        <li>Workplace safety policy templates</li>
+        <li>Anti-harassment and discrimination policies</li>
+        <li>Employment law update notifications</li>
+      </ul>
+    </div>
+
+  </div>
+</section>
+
+<section style="padding-top: 0;">
+  <p class="section-eyebrow">Who We Serve</p>
+  <h2 class="section-title">Built For <span>Your Business</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Starting with small businesses — scaling to serve any organization that needs reliable HR support.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-icon">🏢</span>
+      <div class="who-title">Small Businesses</div>
+      <div class="who-text">1-50 employees. Get enterprise-level HR support without the enterprise price tag. Focus on growing your business — we handle the HR.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">🎖️</span>
+      <div class="who-title">Veteran-Owned Businesses</div>
+      <div class="who-text">Built by a Colonel who understands military precision and discipline. Special pricing and dedicated support for veteran-owned businesses.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">📈</span>
+      <div class="who-title">Growing Companies</div>
+      <div class="who-text">50-200 employees. Scaling your team requires scalable HR. WaveSurgeAI HRaaS grows with you — from your first hire to your 200th.</div>
+    </div>
+  </div>
+
+  <div class="why-block">
+    <h3 style="font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 8px;">Why <span style="color: var(--gold);">WaveSurgeAI HRaaS</span></h3>
+    <p style="font-size: 16px; color: var(--gray); line-height: 1.7;">HR handled with the same precision and accountability that defined 27 years of military service.</p>
+    <div class="why-grid">
+      <div class="why-item">
+        <div class="why-number">27</div>
+        <div class="why-label">Years of Leadership</div>
+        <div class="why-text">Military precision applied to every HR process — no shortcuts, no excuses</div>
+      </div>
+      <div class="why-item">
+        <div class="why-number">100%</div>
+        <div class="why-label">Compliance Focus</div>
+        <div class="why-text">Every policy and document built to keep your business legally protected</div>
+      </div>
+      <div class="why-item">
+        <div class="why-number">AI</div>
+        <div class="why-label">Powered Efficiency</div>
+        <div class="why-text">AI-assisted HR tools that save time and reduce administrative burden</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="packages" style="padding-top: 0;">
+  <p class="section-eyebrow">Choose Your Plan</p>
+  <h2 class="section-title">HRaaS <span>Packages</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Simple transparent pricing — no hidden fees, no long-term contracts required.</p>
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <div class="pricing-title">Starter</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Monthly — 1 to 10 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>HR document library access</li>
+        <li>New hire onboarding templates</li>
+        <li>Basic policy and handbook templates</li>
+        <li>Payroll guidance and support</li>
+        <li>Email support</li>
+      </ul>
+      <a href="venuehr.html" class="btn-secondary" style="width:100%; text-align:center;">Get Started</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-title">Growth</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Monthly — 11 to 50 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Everything in Starter</li>
+        <li>Full onboarding automation</li>
+        <li>Benefits administration support</li>
+        <li>Compliance monitoring and updates</li>
+        <li>Performance management templates</li>
+        <li>Priority email and phone support</li>
+        <li>Monthly HR review session</li>
+      </ul>
+      <a href="venuehr.html" class="btn-primary" style="width:100%; text-align:center;">Get Started</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-title">Enterprise</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Monthly — 51 to 200 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Everything in Growth</li>
+        <li>Full HR department support</li>
+        <li>Custom policy development</li>
+        <li>Advanced compliance management</li>
+        <li>Dedicated HR account manager</li>
+        <li>Weekly strategy sessions</li>
+        <li>Custom reporting and analytics</li>
+      </ul>
+      <a href="venuehr.html" class="btn-secondary" style="width:100%; text-align:center;">Get Started</a>
+    </div>
+
+  </div>
+</section>
+
+<div id="contact-strip" class="contact-strip">
+  <h2>Ready To <span>Get Started?</span></h2>
+  <p>All HRaaS packages are custom quoted based on your business size and specific needs. Reach out and let's build your HR solution.</p>
+  <div class="contact-methods">
+    <div class="contact-method">
+      <div class="contact-method-label">Phone</div>
+      <a href="tel:2707910582" class="contact-method-value">270-791-0582</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Email</div>
+      <a href="mailto:info@wavesurgeai.com" class="contact-method-value">info@wavesurgeai.com</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Website</div>
+      <a href="index.html#contact" class="contact-method-value">Contact Form</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">TikTok / Instagram</div>
+      <a href="https://tiktok.com/@WaveSurgeAI" target="_blank" class="contact-method-value">@WaveSurgeAI</a>
+    </div>
+  </div>
+  <div class="contact-buttons">
+    <a href="tel:2707910582" class="btn-primary">Call Now</a>
+    <a href="index.html#contact" class="btn-secondary">Send A Message</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span> — Wave Surge AI LLC. All rights reserved. — Colonel, US Army (Retired)</div>
+  <a href="index.html" class="footer-back">← Return To WaveSurgeAI.com</a>
+</footer>
+
+</body>
+</html>

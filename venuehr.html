@@ -1,0 +1,355 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VenueHR — HR Platform Access | WaveSurgeAI</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero {
+    min-height: 50vh; display: flex; align-items: center; justify-content: center;
+    text-align: center; padding: 140px 60px 80px;
+    background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
+    position: relative; overflow: hidden;
+  }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 8vw, 100px); letter-spacing: 4px; line-height: 1; margin-bottom: 16px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 640px; margin: 0 auto 40px; line-height: 1.7; }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 600px; }
+
+  /* LOGIN PORTAL */
+  .login-portal {
+    background: var(--navy);
+    border: 1px solid rgba(201,168,76,0.3);
+    padding: 60px; text-align: center;
+    position: relative; overflow: hidden;
+    margin: 0 0 3px 0;
+  }
+  .login-portal::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue)); }
+  .login-title { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .login-title span { color: var(--gold); }
+  .login-sub { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 500px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .login-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  /* PRICING */
+  .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .pricing-card { background: var(--light-navy); padding: 40px 32px; position: relative; transition: all 0.3s; }
+  .pricing-card.featured { background: var(--navy); border: 1px solid rgba(201,168,76,0.3); }
+  .pricing-card:hover { transform: translateY(-4px); }
+  .pricing-badge { display: inline-block; background: var(--gold); color: var(--deep-navy); font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 4px 12px; margin-bottom: 16px; }
+  .pricing-title { font-family: 'Bebas Neue', sans-serif; font-size: 32px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .pricing-price { font-family: 'Bebas Neue', sans-serif; font-size: 52px; color: var(--gold); letter-spacing: 2px; line-height: 1; margin-bottom: 4px; }
+  .pricing-period { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-transform: uppercase; margin-bottom: 24px; }
+  .pricing-divider { height: 1px; background: rgba(255,255,255,0.08); margin-bottom: 24px; }
+  .pricing-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .pricing-features li { display: flex; align-items: flex-start; gap: 10px; font-size: 14px; color: var(--gray); line-height: 1.5; }
+  .pricing-features li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
+
+  /* FREE TRIAL */
+  .trial-card { background: var(--light-navy); border: 1px solid rgba(74,144,217,0.2); padding: 48px; position: relative; overflow: hidden; margin-bottom: 3px; }
+  .trial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold)); }
+  .trial-badge { display: inline-block; background: rgba(74,144,217,0.15); border: 1px solid var(--steel-blue); color: var(--steel-blue); font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 20px; }
+  .trial-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 3px; margin-bottom: 16px; }
+  .trial-title span { color: var(--gold); }
+  .trial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
+  .trial-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 20px 0 32px; }
+  .trial-features li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white); }
+  .trial-features li::before { content: '✓'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
+  .trial-form { display: flex; flex-direction: column; gap: 16px; }
+  .form-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; display: block; }
+  .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 14px 16px; font-family: 'Lato', sans-serif; font-size: 15px; outline: none; transition: border-color 0.3s; }
+  .form-input:focus { border-color: var(--steel-blue); }
+  .form-input::placeholder { color: rgba(136,146,164,0.6); }
+
+  /* DEMO REQUEST */
+  .demo-card { background: var(--navy); border: 1px solid rgba(201,168,76,0.15); padding: 48px; position: relative; overflow: hidden; }
+  .demo-card::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, var(--gold), var(--steel-blue)); }
+  .demo-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 3px; margin-bottom: 16px; }
+  .demo-title span { color: var(--gold); }
+  .demo-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: start; }
+  .demo-text { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 20px; }
+  .demo-points { list-style: none; display: flex; flex-direction: column; gap: 12px; margin-bottom: 32px; }
+  .demo-points li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white); }
+  .demo-points li::before { content: '▶'; color: var(--gold); font-size: 10px; flex-shrink: 0; }
+
+  /* FEATURES */
+  .features-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px; margin-top: 48px; }
+  .feature-card { background: var(--light-navy); padding: 32px 24px; text-align: center; transition: all 0.3s; border-bottom: 2px solid transparent; }
+  .feature-card:hover { background: var(--navy); border-bottom-color: var(--gold); transform: translateY(-4px); }
+  .feature-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .feature-title { font-family: 'Bebas Neue', sans-serif; font-size: 20px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .feature-text { font-size: 13px; color: var(--gray); line-height: 1.6; }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); } .footer-copy span { color: var(--gold); }
+  .footer-links { display: flex; justify-content: center; gap: 24px; margin-top: 12px; flex-wrap: wrap; }
+  .footer-links a { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 1px; color: var(--gray); text-decoration: none; text-transform: uppercase; }
+  .footer-links a:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
+    .pricing-grid { grid-template-columns: 1fr; } .trial-grid { grid-template-columns: 1fr; }
+    .demo-grid { grid-template-columns: 1fr; } .features-grid { grid-template-columns: repeat(2, 1fr); }
+    .login-portal { padding: 40px 24px; } footer { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="hraas.html" class="nav-back">← Back To HRaaS</a>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div>
+    <p class="hero-eyebrow">Human Resources as a Service</p>
+    <h1 class="hero-title">Venue<span>HR</span></h1>
+    <p class="hero-sub">Your complete HR platform — document management, employee onboarding, payroll administration, and compliance — all in one powerful dashboard built for small businesses.</p>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary">Access Dashboard</a>
+      <a href="#free-trial" class="btn-secondary">Start Free Trial</a>
+    </div>
+  </div>
+</div>
+
+<!-- PLATFORM FEATURES -->
+<section>
+  <p class="section-eyebrow">Platform Overview</p>
+  <h2 class="section-title">Everything In One <span>Dashboard</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">VenueHR gives your business enterprise-level HR tools at small business pricing — powered by AI and built with military precision.</p>
+  <div class="features-grid">
+    <div class="feature-card">
+      <span class="feature-icon">📁</span>
+      <div class="feature-title">Document Management</div>
+      <div class="feature-text">Complete HR document library — policies, templates, forms — all stored securely and accessible anytime.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">🚀</span>
+      <div class="feature-title">Employee Onboarding</div>
+      <div class="feature-text">Automated onboarding workflows — new hire paperwork, checklists, and orientation materials handled automatically.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">💰</span>
+      <div class="feature-title">Payroll & Benefits</div>
+      <div class="feature-text">Payroll processing support, benefits administration, PTO tracking, and year-end reporting — all in one place.</div>
+    </div>
+    <div class="feature-card">
+      <span class="feature-icon">⚖️</span>
+      <div class="feature-title">Compliance Management</div>
+      <div class="feature-text">Federal and state compliance monitoring, policy updates, and legal protection — always current, always covered.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CLIENT LOGIN PORTAL -->
+<div style="max-width: 1100px; margin: 0 auto; padding: 0 60px;">
+  <div class="login-portal">
+    <h2 class="login-title">Existing Client <span>Login</span></h2>
+    <p class="login-sub">Already a VenueHR client? Access your dashboard directly. Your HR data, documents, and tools are waiting.</p>
+    <div class="login-buttons">
+      <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary">Login To VenueHR Dashboard</a>
+      <a href="mailto:info@wavesurgeai.com" class="btn-secondary">Need Help Logging In?</a>
+    </div>
+  </div>
+</div>
+
+<!-- FREE TRIAL -->
+<section id="free-trial" style="padding-top: 60px;">
+  <div class="trial-card">
+    <div class="trial-badge">No Credit Card Required</div>
+    <div class="trial-grid">
+      <div>
+        <h2 class="trial-title">Start Your <span>Free Trial</span></h2>
+        <p style="font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 16px;">Get full access to VenueHR for 14 days — no credit card required. See exactly how WaveSurgeAI HRaaS transforms your HR operations.</p>
+        <ul class="trial-features">
+          <li>Full platform access for 14 days</li>
+          <li>Up to 10 employee profiles</li>
+          <li>Complete document library access</li>
+          <li>Onboarding workflow setup</li>
+          <li>Dedicated onboarding support</li>
+          <li>No credit card required</li>
+        </ul>
+      </div>
+      <div class="trial-form">
+        <div>
+          <label class="form-label">Business Name</label>
+          <input type="text" class="form-input" placeholder="Your business name">
+        </div>
+        <div>
+          <label class="form-label">Your Name</label>
+          <input type="text" class="form-input" placeholder="First and last name">
+        </div>
+        <div>
+          <label class="form-label">Business Email</label>
+          <input type="email" class="form-input" placeholder="your@business.com">
+        </div>
+        <div>
+          <label class="form-label">Phone Number</label>
+          <input type="tel" class="form-input" placeholder="(000) 000-0000">
+        </div>
+        <div>
+          <label class="form-label">Number of Employees</label>
+          <input type="text" class="form-input" placeholder="e.g. 12">
+        </div>
+        <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary" style="text-align:center; width:100%;">Start Free Trial →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRICING -->
+<section style="padding-top: 60px;">
+  <p class="section-eyebrow">Simple Transparent Pricing</p>
+  <h2 class="section-title">VenueHR <span>Plans</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">No hidden fees. No long-term contracts. Cancel anytime. All plans include a 14-day free trial.</p>
+  <div class="pricing-grid">
+
+    <div class="pricing-card">
+      <div class="pricing-title">Starter</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Per Month — Up to 10 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>HR document library access</li>
+        <li>New hire onboarding templates</li>
+        <li>Basic policy and handbook templates</li>
+        <li>Payroll guidance and support</li>
+        <li>Email support</li>
+        <li>14-day free trial included</li>
+      </ul>
+      <a href="https://venuehr.onrender.com" target="_blank" class="btn-secondary" style="width:100%; text-align:center;">Start Free Trial</a>
+    </div>
+
+    <div class="pricing-card featured">
+      <div class="pricing-badge">Most Popular</div>
+      <div class="pricing-title">Growth</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Per Month — Up to 50 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Everything in Starter</li>
+        <li>Full onboarding automation</li>
+        <li>Benefits administration support</li>
+        <li>Compliance monitoring and updates</li>
+        <li>Performance management templates</li>
+        <li>Priority phone and email support</li>
+        <li>Monthly HR strategy session</li>
+        <li>14-day free trial included</li>
+      </ul>
+      <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary" style="width:100%; text-align:center;">Start Free Trial</a>
+    </div>
+
+    <div class="pricing-card">
+      <div class="pricing-title">Enterprise</div>
+      <div class="pricing-price">Custom</div>
+      <div class="pricing-period">Per Month — Up to 200 Employees</div>
+      <div class="pricing-divider"></div>
+      <ul class="pricing-features">
+        <li>Everything in Growth</li>
+        <li>Full HR department support</li>
+        <li>Custom policy development</li>
+        <li>Advanced compliance management</li>
+        <li>Dedicated HR account manager</li>
+        <li>Weekly strategy sessions</li>
+        <li>Custom reporting and analytics</li>
+        <li>14-day free trial included</li>
+      </ul>
+      <a href="https://venuehr.onrender.com" target="_blank" class="btn-secondary" style="width:100%; text-align:center;">Start Free Trial</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- DEMO REQUEST -->
+<section style="padding-top: 60px;">
+  <div class="demo-card">
+    <div class="demo-grid">
+      <div>
+        <h2 class="demo-title">Request A <span>Demo</span></h2>
+        <p class="demo-text">See VenueHR in action before you commit. Schedule a personalized 30-minute demo with a WaveSurgeAI HRaaS specialist — we'll walk through your specific business needs and show you exactly how VenueHR solves them.</p>
+        <ul class="demo-points">
+          <li>Personalized 30-minute walkthrough</li>
+          <li>See your specific use case demonstrated</li>
+          <li>Get answers to all your questions</li>
+          <li>No pressure — no obligation</li>
+          <li>Available by phone, video, or in person</li>
+        </ul>
+        <div style="display:flex; gap:16px; flex-wrap:wrap;">
+          <a href="tel:2707910582" class="btn-primary">Call To Schedule — 270-791-0582</a>
+          <a href="mailto:info@wavesurgeai.com" class="btn-secondary">Email Us</a>
+        </div>
+      </div>
+      <div>
+        <div style="background: var(--light-navy); padding: 40px; border-left: 3px solid var(--gold);">
+          <div style="font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 2px; margin-bottom: 20px;">What To Expect</div>
+          <ul style="list-style:none; display:flex; flex-direction:column; gap:16px;">
+            <li style="display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--gray); line-height:1.6;">
+              <span style="color:var(--gold); font-family:'Bebas Neue', sans-serif; font-size:20px; flex-shrink:0;">01</span>
+              We learn about your business — size, industry, current HR challenges
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--gray); line-height:1.6;">
+              <span style="color:var(--gold); font-family:'Bebas Neue', sans-serif; font-size:20px; flex-shrink:0;">02</span>
+              Live walkthrough of VenueHR dashboard tailored to your needs
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--gray); line-height:1.6;">
+              <span style="color:var(--gold); font-family:'Bebas Neue', sans-serif; font-size:20px; flex-shrink:0;">03</span>
+              Q&A — ask anything about features, pricing, or implementation
+            </li>
+            <li style="display:flex; align-items:flex-start; gap:12px; font-size:14px; color:var(--gray); line-height:1.6;">
+              <span style="color:var(--gold); font-family:'Bebas Neue', sans-serif; font-size:20px; flex-shrink:0;">04</span>
+              Custom proposal sent within 24 hours if you want to move forward
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-copy">© 2026 <span>WaveSurgeAI</span> — Wave Surge AI LLC. All rights reserved. — Colonel, US Army (Retired)</div>
+  <div class="footer-links">
+    <a href="index.html">Home</a>
+    <a href="hraas.html">HRaaS</a>
+    <a href="https://venuehr.onrender.com" target="_blank">VenueHR Dashboard</a>
+    <a href="privacy-policy.html">Privacy Policy</a>
+    <a href="terms-of-service.html">Terms of Service</a>
+    <a href="index.html#contact">Contact</a>
+  </div>
+</footer>
+
+</body>
+</html>
