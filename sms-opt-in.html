@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMS Opt-In — WaveSurgeAI VenueHR</title>
+  <title>SMS Opt-In — WaveSurgeAI</title>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --deep-navy: #0A1628;
       --navy: #183A6B;
-      --steel-blue: #4A9009;
+      --steel-blue: #4A90D9;
       --gold: #C9A84C;
       --white: #FFFFFF;
       --gray: #8892A4;
@@ -27,7 +27,6 @@
       font-family: 'Lato', sans-serif;
     }
 
-    /* ── NAV ── */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -60,7 +59,6 @@
     }
     .nav-back:hover { color: var(--white); }
 
-    /* ── HERO ── */
     .hero {
       padding: 140px 60px 80px;
       background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
@@ -92,9 +90,8 @@
       line-height: 1.7;
     }
 
-    /* ── CONTENT ── */
     .content {
-      max-width: 860px;
+      max-width: 760px;
       margin: 0 auto;
       padding: 80px 60px;
     }
@@ -128,7 +125,6 @@
       border-radius: 2px;
     }
 
-    /* ── ALERT BANNER ── */
     .alert-banner {
       background: rgba(74,144,9,0.08);
       border: 1px solid rgba(74,144,9,0.3);
@@ -153,7 +149,6 @@
     }
     .alert-text p { font-size: 14px; color: var(--gray); line-height: 1.65; }
 
-    /* ── FORM CARD ── */
     .form-card {
       background: var(--light-navy);
       border: 1px solid var(--border);
@@ -195,7 +190,6 @@
     .field input:focus { border-color: var(--gold); background: rgba(201,168,76,0.04); }
     .field input::placeholder { color: rgba(136,146,164,0.4); }
 
-    /* ── CONSENT ── */
     .consent-block {
       background: rgba(201,168,76,0.04);
       border: 1px solid rgba(201,168,76,0.2);
@@ -217,7 +211,6 @@
     .consent-row label a { color: var(--gold); text-decoration: underline; text-underline-offset: 2px; }
     .consent-row label a:hover { color: var(--white); }
 
-    /* ── BUTTON ── */
     .btn-submit {
       width: 100%;
       padding: 16px;
@@ -237,28 +230,6 @@
     .btn-submit:active { transform: scale(0.99); }
     .btn-submit:disabled { background: rgba(201,168,76,0.2); color: var(--gray); cursor: not-allowed; }
 
-    /* ── MSG GRID ── */
-    .msg-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-    @media (max-width: 520px) { .msg-grid { grid-template-columns: 1fr; } }
-
-    .msg-card {
-      background: var(--light-navy);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-    }
-    .msg-label {
-      font-family: 'Montserrat', sans-serif;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 1.5px;
-      text-transform: uppercase;
-      color: var(--gold);
-      margin-bottom: 10px;
-    }
-    .msg-card p { font-size: 14px; color: var(--gray); line-height: 1.65; }
-
-    /* ── SMS BUBBLES ── */
     .sms-bubble {
       background: var(--light-navy);
       border: 1px solid var(--border);
@@ -281,7 +252,6 @@
       margin-bottom: 10px;
     }
 
-    /* ── DISCLOSURE TABLE ── */
     .disclosure-table { width: 100%; border-collapse: collapse; }
     .disclosure-table tr { border-bottom: 1px solid rgba(255,255,255,0.05); }
     .disclosure-table tr:last-child { border-bottom: none; }
@@ -300,7 +270,6 @@
     .disclosure-table a { color: var(--gold); text-decoration: none; }
     .disclosure-table a:hover { text-decoration: underline; }
 
-    /* ── KEYWORD PILLS ── */
     .kw-grid { display: flex; flex-wrap: wrap; gap: 12px; }
     .kw-pill {
       background: var(--light-navy);
@@ -323,7 +292,6 @@
       color: var(--gray);
     }
 
-    /* ── CONTACT ── */
     .contact-card {
       background: var(--light-navy);
       border: 1px solid var(--border);
@@ -344,7 +312,6 @@
     .contact-card a { color: var(--gold); text-decoration: none; }
     .contact-card a:hover { text-decoration: underline; }
 
-    /* ── FOOTER ── */
     footer {
       text-align: center;
       padding: 32px 24px;
@@ -368,26 +335,26 @@
 
   <div class="hero">
     <div class="hero-eyebrow">SMS Communications</div>
-    <h1 class="hero-title">VenueHR <span>Staff Notifications</span></h1>
-    <p class="hero-sub">Transactional SMS for onboarding, scheduling, time &amp; attendance, and operational alerts — powered by WaveSurgeAI VenueHR.</p>
+    <h1 class="hero-title">WaveSurgeAI <span>SMS Program</span></h1>
+    <p class="hero-sub">Voluntary SMS opt-in for product demonstration communications from WaveSurgeAI, a Service-Disabled Veteran-Owned Business based in Westfield, Indiana.</p>
   </div>
 
   <div class="content">
 
     <div class="alert-banner">
-      <div class="alert-icon">🔔</div>
+      <div class="alert-icon">📋</div>
       <div class="alert-text">
-        <strong>Transactional Only — No Marketing</strong>
-        <p>This SMS program is used exclusively for operational notifications related to the VenueHR platform: staff onboarding, shift scheduling, clock in/out, availability requests, and platform alerts. No promotional or marketing messages are sent through this program.</p><p style="margin-top:10px; font-size:0.88rem; color:var(--gray);">SMS opt-in is strictly voluntary. Staff who do not opt in may contact their venue manager for alternative communication arrangements. Opting out never affects employment, compensation, or service access.</p>
+        <strong>Demonstration Program — Voluntary Opt-In Only</strong>
+        <p>This SMS program is used exclusively for product demonstration purposes by WaveSurgeAI. Participation is entirely voluntary. Opting in is never a condition of any service, transaction, employment, or platform access. You may opt out at any time by replying STOP.</p>
       </div>
     </div>
 
     <!-- FORM -->
     <div class="section">
-      <div class="section-label">Staff SMS Opt-In</div>
+      <div class="section-label">SMS Opt-In</div>
       <div class="form-card">
-        <h2>Opt In To VenueHR SMS</h2>
-        <p class="form-sub">Enter your information below to receive VenueHR operational text messages. Message and data rates may apply.</p>
+        <h2>Opt In To WaveSurgeAI SMS</h2>
+        <p class="form-sub">Enter your information below to voluntarily receive WaveSurgeAI demonstration SMS messages. Participation is optional and has no bearing on any service or transaction. Message and data rates may apply.</p>
 
         <div class="form-row">
           <div class="field">
@@ -414,12 +381,12 @@
           <div class="consent-row">
             <input type="checkbox" id="consent" name="consent" />
             <label for="consent">
-              By checking this box and submitting this form, I expressly consent to receive
-              <strong>recurring automated transactional text messages</strong> from
-              <strong>WaveSurgeAI VenueHR (Wave Surge AI LLC)</strong> at the phone number provided,
-              including staff onboarding instructions, shift scheduling notifications, availability
-              requests, clock in/out confirmations, and platform operational alerts.
-              <strong>Consent is not a condition of employment, service, or platform access.</strong> Staff members who prefer not to receive SMS notifications may contact their venue manager to arrange alternative communication methods. Opting out at any time will never affect employment status, compensation, or access to VenueHR services.
+              By checking this box and submitting this form, I voluntarily consent to receive
+              <strong>demonstration SMS messages</strong> from
+              <strong>WaveSurgeAI (Wave Surge AI LLC)</strong> at the phone number provided.
+              <strong>Consent is not a condition of any service, transaction, employment, or platform access.</strong>
+              I understand this is a voluntary demonstration program only.
+              Message and data rates may apply. Message frequency varies.
               Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for assistance.
               We will never sell, share, or rent your mobile phone number or mobile data to any third party
               or affiliate for any purpose. I have read and agree to the
@@ -433,37 +400,35 @@
         </div>
 
         <button class="btn-submit" id="submitBtn" disabled onclick="handleSubmit()">
-          Opt In To VenueHR SMS
+          Opt In To WaveSurgeAI SMS
         </button>
-      </div>
-    </div>
-
-    <!-- WHAT YOU'LL RECEIVE -->
-    <div class="section">
-      <div class="section-label">What You'll Receive</div>
-      <div class="msg-grid">
-        <div class="msg-card"><div class="msg-label">Onboarding</div><p>Staff agreement signing links, onboarding step prompts, and welcome confirmations when you join a venue.</p></div>
-        <div class="msg-card"><div class="msg-label">Scheduling</div><p>Availability requests for upcoming events, shift confirmation notices, and schedule broadcasts from your venue manager.</p></div>
-        <div class="msg-card"><div class="msg-label">Time &amp; Attendance</div><p>Clock in/out confirmations, break compliance reminders, and shift status responses.</p></div>
-        <div class="msg-card"><div class="msg-label">Operational Alerts</div><p>Shift swap request updates, FAQ auto-replies, and platform notifications relevant to your role.</p></div>
       </div>
     </div>
 
     <!-- SAMPLE MESSAGES -->
     <div class="section">
       <div class="section-label">Sample Messages</div>
-      <div class="sms-bubble"><span class="sms-tag">Sample 1 — Onboarding</span>WaveSurgeAI VenueHR: Hi [Name], your staff onboarding link is ready. Please complete your agreement here: venuehr.onrender.com/onboard/[token]. Reply HELP for help, STOP to opt out. Msg &amp; data rates may apply.</div>
-      <div class="sms-bubble"><span class="sms-tag">Sample 2 — Scheduling / Availability Request</span>WaveSurgeAI VenueHR: You're confirmed for Johnson Wedding Reception on 06/14 at 4:00 PM. Reply CLOCK IN when you arrive on site. Reply STOP to opt out. Msg &amp; data rates may apply.</div>
-      <div class="sms-bubble"><span class="sms-tag">Sample 3 — Time &amp; Attendance</span>WaveSurgeAI VenueHR: Clock-in recorded at 4:02 PM. Reply BREAK to start a break, CLOCK OUT to end your shift. Reply HELP for all commands. Msg &amp; data rates may apply.</div>
+      <div class="sms-bubble">
+        <span class="sms-tag">Sample 1 — Scheduling Confirmation</span>
+        WaveSurgeAI: You're confirmed for [Event Name] on [Date] at [Time]. Reply CLOCK IN when you arrive on site. Reply STOP to opt out. Msg &amp; data rates may apply.
+      </div>
+      <div class="sms-bubble">
+        <span class="sms-tag">Sample 2 — Time &amp; Attendance</span>
+        WaveSurgeAI: Clock-in recorded at [Time]. Reply BREAK to start a break, CLOCK OUT to end your shift. Reply HELP for all commands. Reply STOP to opt out. Msg &amp; data rates may apply.
+      </div>
+      <div class="sms-bubble">
+        <span class="sms-tag">Sample 3 — Availability Request</span>
+        WaveSurgeAI: You have been requested for [Event Name] on [Date]. Reply AVAIL to confirm or UNAVAIL to decline. Reply STOP to opt out. Msg &amp; data rates may apply.
+      </div>
     </div>
 
     <!-- DISCLOSURE -->
     <div class="section">
       <div class="section-label">SMS Program Disclosure</div>
       <table class="disclosure-table">
-        <tr><td>Program Name</td><td>WaveSurgeAI VenueHR Staff Notifications</td></tr>
-        <tr><td>Program Type</td><td>Transactional — operational notifications only. No marketing or promotional content.</td></tr>
-        <tr><td>Message Frequency</td><td>Varies based on event activity and operational needs</td></tr>
+        <tr><td>Program Name</td><td>WaveSurgeAI SMS Demonstration Program</td></tr>
+        <tr><td>Program Type</td><td>Voluntary demonstration program — not a condition of any service, transaction, or employment.</td></tr>
+        <tr><td>Message Frequency</td><td>Varies based on demonstration activity</td></tr>
         <tr><td>Message &amp; Data Rates</td><td>May apply based on your carrier plan</td></tr>
         <tr><td>Opt-Out</td><td>Reply STOP to any message to unsubscribe immediately</td></tr>
         <tr><td>Help</td><td>Reply HELP to any message or email info@wavesurgeai.com</td></tr>
@@ -475,17 +440,11 @@
 
     <!-- KEYWORDS -->
     <div class="section">
-      <div class="section-label">SMS Commands &amp; Keywords</div>
+      <div class="section-label">SMS Keywords</div>
       <div class="kw-grid">
         <div class="kw-pill"><span class="kw-cmd">STOP</span><span class="kw-desc">Unsubscribe immediately</span></div>
         <div class="kw-pill"><span class="kw-cmd">HELP</span><span class="kw-desc">Get help &amp; contact info</span></div>
         <div class="kw-pill"><span class="kw-cmd">START</span><span class="kw-desc">Re-subscribe after opt-out</span></div>
-        <div class="kw-pill"><span class="kw-cmd">CLOCK IN</span><span class="kw-desc">Start your shift</span></div>
-        <div class="kw-pill"><span class="kw-cmd">CLOCK OUT</span><span class="kw-desc">End your shift</span></div>
-        <div class="kw-pill"><span class="kw-cmd">BREAK</span><span class="kw-desc">Start a break</span></div>
-        <div class="kw-pill"><span class="kw-cmd">BACK</span><span class="kw-desc">End a break</span></div>
-        <div class="kw-pill"><span class="kw-cmd">STATUS</span><span class="kw-desc">Check current shift status</span></div>
-        <div class="kw-pill"><span class="kw-cmd">FAQ</span><span class="kw-desc">Search the FAQ</span></div>
       </div>
     </div>
 
