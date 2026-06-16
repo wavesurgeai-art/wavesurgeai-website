@@ -381,20 +381,24 @@
           <div class="consent-row">
             <input type="checkbox" id="consent" name="consent" />
             <label for="consent">
-              By checking this box and submitting this form, I voluntarily consent to receive
+              By checking this box, I voluntarily consent to receive
               <strong>operational SMS notifications</strong> from
               <strong>WaveSurgeAI (Wave Surge AI LLC)</strong> at the phone number provided.
-              <strong>Consent is not a condition of any service, transaction, employment, or platform access.</strong>
-              I understand this is a voluntary opt-in and is never a condition of employment or service.
+              <strong>This SMS consent is optional and is not a condition of any service, transaction, employment, or platform access.</strong>
               Message and data rates may apply. Message frequency varies.
               Reply <strong>STOP</strong> to opt out at any time. Reply <strong>HELP</strong> for assistance.
               We will never sell, share, or rent your mobile phone number or mobile data to any third party
-              or affiliate for any purpose. I have read and agree to the
+              or affiliate for any purpose. For full details on how we handle mobile data, see our
+              <a href="https://wavesurgeai.com/privacy-policy#sms" target="_blank">SMS Communications Policy</a>.
+            </label>
+          </div>
+          <div class="consent-row" style="margin-top:16px;">
+            <input type="checkbox" id="terms" name="terms" />
+            <label for="terms">
+              I have read and agree to the
               <a href="https://wavesurgeai.com/privacy-policy" target="_blank">Privacy Policy</a>
               and
               <a href="https://wavesurgeai.com/terms-of-service" target="_blank">Terms of Service</a>.
-              For full details on how we handle mobile data, see our
-              <a href="https://wavesurgeai.com/privacy-policy#sms" target="_blank">SMS Communications Policy</a>.
             </label>
           </div>
         </div>
@@ -475,8 +479,11 @@
 
   <script>
     const cb = document.getElementById('consent');
+    const terms = document.getElementById('terms');
     const btn = document.getElementById('submitBtn');
-    cb.addEventListener('change', () => { btn.disabled = !cb.checked; });
+    function updateBtn() { btn.disabled = !(cb.checked && terms.checked); }
+    cb.addEventListener('change', updateBtn);
+    terms.addEventListener('change', updateBtn);
     function handleSubmit() {
       const first = document.querySelector('[name="first_name"]').value.trim();
       const last  = document.querySelector('[name="last_name"]').value.trim();
