@@ -73,20 +73,6 @@
   .pricing-features li::before { content: '✓'; color: var(--gold); font-size: 12px; flex-shrink: 0; margin-top: 2px; }
 
   /* FREE TRIAL */
-  .trial-card { background: var(--light-navy); border: 1px solid rgba(74,144,217,0.2); padding: 48px; position: relative; overflow: hidden; margin-bottom: 3px; }
-  .trial-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold)); }
-  .trial-badge { display: inline-block; background: rgba(74,144,217,0.15); border: 1px solid var(--steel-blue); color: var(--steel-blue); font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; padding: 6px 16px; margin-bottom: 20px; }
-  .trial-title { font-family: 'Bebas Neue', sans-serif; font-size: 40px; letter-spacing: 3px; margin-bottom: 16px; }
-  .trial-title span { color: var(--gold); }
-  .trial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
-  .trial-features { list-style: none; display: flex; flex-direction: column; gap: 12px; margin: 20px 0 32px; }
-  .trial-features li { display: flex; align-items: center; gap: 12px; font-size: 15px; color: var(--white); }
-  .trial-features li::before { content: '✓'; color: var(--gold); font-size: 14px; flex-shrink: 0; }
-  .trial-form { display: flex; flex-direction: column; gap: 16px; }
-  .form-label { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gray); margin-bottom: 4px; display: block; }
-  .form-input { width: 100%; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1); color: var(--white); padding: 14px 16px; font-family: 'Lato', sans-serif; font-size: 15px; outline: none; transition: border-color 0.3s; }
-  .form-input:focus { border-color: var(--steel-blue); }
-  .form-input::placeholder { color: rgba(136,146,164,0.6); }
 
   /* DEMO REQUEST */
   .demo-card { background: var(--navy); border: 1px solid rgba(201,168,76,0.15); padding: 48px; position: relative; overflow: hidden; }
@@ -115,7 +101,7 @@
 
   @media (max-width: 768px) {
     nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
-    .pricing-grid { grid-template-columns: 1fr; } .trial-grid { grid-template-columns: 1fr; }
+    .pricing-grid { grid-template-columns: 1fr; }
     .demo-grid { grid-template-columns: 1fr; } .features-grid { grid-template-columns: repeat(2, 1fr); }
     .login-portal { padding: 40px 24px; } footer { padding: 32px 24px; }
   }
@@ -138,7 +124,7 @@
     <p class="hero-sub">Your complete HR platform — document management, employee onboarding, payroll administration, and compliance — all in one powerful dashboard built for small businesses.</p>
     <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
       <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary">Access Dashboard</a>
-      <a href="#free-trial" class="btn-secondary">Start Free Trial</a>
+      <a href="#demo" class="btn-secondary">Request Demo</a>
     </div>
   </div>
 </div>
@@ -185,56 +171,12 @@
   </div>
 </div>
 
-<!-- FREE TRIAL -->
-<section id="free-trial" style="padding-top: 60px;">
-  <div class="trial-card">
-    <div class="trial-badge">No Credit Card Required</div>
-    <div class="trial-grid">
-      <div>
-        <h2 class="trial-title">Start Your <span>Free Trial</span></h2>
-        <p style="font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 16px;">Get full access to VenueHR for 14 days — no credit card required. See exactly how WaveSurgeAI HRaaS transforms your HR operations.</p>
-        <ul class="trial-features">
-          <li>Full platform access for 14 days</li>
-          <li>Up to 10 employee profiles</li>
-          <li>Complete document library access</li>
-          <li>Onboarding workflow setup</li>
-          <li>Dedicated onboarding support</li>
-          <li>No credit card required</li>
-        </ul>
-      </div>
-      <div class="trial-form">
-        <div>
-          <label class="form-label">Business Name</label>
-          <input type="text" class="form-input" placeholder="Your business name">
-        </div>
-        <div>
-          <label class="form-label">Your Name</label>
-          <input type="text" class="form-input" placeholder="First and last name">
-        </div>
-        <div>
-          <label class="form-label">Business Email</label>
-          <input type="email" class="form-input" placeholder="your@business.com">
-        </div>
-        <div>
-          <label class="form-label">Phone Number</label>
-          <input type="tel" class="form-input" placeholder="(000) 000-0000">
-        </div>
-        <div>
-          <label class="form-label">Number of Employees</label>
-          <input type="text" class="form-input" placeholder="e.g. 12">
-        </div>
-        <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary" style="text-align:center; width:100%;">Start Free Trial →</a>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- PRICING -->
 <section style="padding-top: 60px;">
   <p class="section-eyebrow">Simple Transparent Pricing</p>
   <h2 class="section-title">VenueHR <span>Plans</span></h2>
   <div class="section-divider"></div>
-  <p class="section-sub">No hidden fees. No long-term contracts. Cancel anytime. All plans include a 14-day free trial.</p>
+  <p class="section-sub">No hidden fees. No long-term contracts. Cancel anytime. Every plan starts with a personalized demo.</p>
   <div class="pricing-grid">
 
     <div class="pricing-card">
@@ -248,9 +190,9 @@
         <li>Basic policy and handbook templates</li>
         <li>Payroll guidance and support</li>
         <li>Email support</li>
-        <li>14-day free trial included</li>
+        <li>Personalized onboarding included</li>
       </ul>
-      <a href="https://venuehr.onrender.com" target="_blank" class="btn-secondary" style="width:100%; text-align:center;">Start Free Trial</a>
+      <a href="#demo" class="btn-secondary" style="width:100%; text-align:center;">Request Demo</a>
     </div>
 
     <div class="pricing-card featured">
@@ -267,9 +209,9 @@
         <li>Performance management templates</li>
         <li>Priority phone and email support</li>
         <li>Monthly HR strategy session</li>
-        <li>14-day free trial included</li>
+        <li>Personalized onboarding included</li>
       </ul>
-      <a href="https://venuehr.onrender.com" target="_blank" class="btn-primary" style="width:100%; text-align:center;">Start Free Trial</a>
+      <a href="#demo" class="btn-primary" style="width:100%; text-align:center;">Request Demo</a>
     </div>
 
     <div class="pricing-card">
@@ -285,16 +227,16 @@
         <li>Dedicated HR account manager</li>
         <li>Weekly strategy sessions</li>
         <li>Custom reporting and analytics</li>
-        <li>14-day free trial included</li>
+        <li>Personalized onboarding included</li>
       </ul>
-      <a href="https://venuehr.onrender.com" target="_blank" class="btn-secondary" style="width:100%; text-align:center;">Start Free Trial</a>
+      <a href="#demo" class="btn-secondary" style="width:100%; text-align:center;">Request Demo</a>
     </div>
 
   </div>
 </section>
 
 <!-- DEMO REQUEST -->
-<section style="padding-top: 60px;">
+<section id="demo" style="padding-top: 60px;">
   <div class="demo-card">
     <div class="demo-grid">
       <div>
