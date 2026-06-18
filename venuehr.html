@@ -26,7 +26,7 @@
     background: linear-gradient(180deg, var(--light-navy) 0%, var(--deep-navy) 100%);
     position: relative; overflow: hidden;
   }
-  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%); }
+  .hero::before { content: ''; position: absolute; inset: 0; pointer-events: none; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.08) 0%, transparent 70%); }
   .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
   .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 8vw, 100px); letter-spacing: 4px; line-height: 1; margin-bottom: 16px; }
   .hero-title span { color: var(--gold); }
