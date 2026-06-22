@@ -481,7 +481,7 @@
     const cb = document.getElementById('consent');
     const terms = document.getElementById('terms');
     const btn = document.getElementById('submitBtn');
-    function updateBtn() { btn.disabled = !(cb.checked && terms.checked); }
+    function updateBtn() { btn.disabled = !terms.checked; }
     cb.addEventListener('change', updateBtn);
     terms.addEventListener('change', updateBtn);
     function handleSubmit() {
