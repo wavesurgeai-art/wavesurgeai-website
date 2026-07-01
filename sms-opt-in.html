@@ -406,6 +406,8 @@
         <button class="btn-submit" id="submitBtn" disabled onclick="handleSubmit()">
           Opt In To WaveSurgeAI SMS
         </button>
+        <p id="optinStatus" role="status" aria-live="polite"
+           style="display:none; margin-top:18px; font-size:13px; line-height:1.6; text-align:center;"></p>
       </div>
     </div>
 
@@ -481,20 +483,82 @@
     const cb = document.getElementById('consent');
     const terms = document.getElementById('terms');
     const btn = document.getElementById('submitBtn');
+    const statusEl = document.getElementById('optinStatus');
+
+    // VenueHR (Render) endpoint. Cross-origin from wavesurgeai.com — the server
+    // returns the matching CORS header so this page can read the JSON result.
+    const OPTIN_ENDPOINT = 'https://venuehr.wavesurgeai.com/sms/optin';
+
+    // Terms acceptance enables the button; the SMS-consent box stays OPTIONAL
+    // (carrier rule 30923 — never make SMS consent a condition of service).
     function updateBtn() { btn.disabled = !terms.checked; }
     cb.addEventListener('change', updateBtn);
     terms.addEventListener('change', updateBtn);
-    function handleSubmit() {
+
+    function showStatus(msg, kind) {
+      statusEl.textContent = msg;
+      statusEl.style.color =
+        kind === 'error'   ? '#E5736B' :
+        kind === 'success' ? '#7FD18C' :
+                             'var(--gray)';
+      statusEl.style.display = 'block';
+    }
+
+    async function handleSubmit() {
       const first = document.querySelector('[name="first_name"]').value.trim();
       const last  = document.querySelector('[name="last_name"]').value.trim();
       const phone = document.querySelector('[name="phone"]').value.trim();
       const email = document.querySelector('[name="email"]').value.trim();
+
       if (!first || !last || !phone || !email) {
-        alert('Please fill in all fields before submitting.');
+        showStatus('Please fill in all fields before submitting.', 'error');
         return;
       }
-      btn.textContent = 'Submitted — Thank You';
+
+      const originalText = btn.textContent;
       btn.disabled = true;
+      btn.textContent = 'Submitting…';
+      showStatus('Submitting your request… this can take up to a minute on the first try.', 'info');
+
+      // form-urlencoded keeps this a "simple" request (no CORS preflight).
+      const body = new URLSearchParams({
+        first_name: first,
+        last_name:  last,
+        phone:      phone,
+        email:      email,
+        consent:    cb.checked ? 'on' : '',
+        terms:      terms.checked ? 'on' : ''
+      });
+
+      try {
+        const res = await fetch(OPTIN_ENDPOINT, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+          body: body.toString()
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (res.ok && data.ok) {
+          if (data.subscribed) {
+            // Confirmed opt-in — lock the button to prevent duplicate submits.
+            btn.textContent = 'Subscribed — Thank You';
+            showStatus(data.message || "You're subscribed.", 'success');
+          } else {
+            // Saved, but the SMS box was left unchecked — let them re-submit.
+            btn.textContent = originalText;
+            btn.disabled = !terms.checked;
+            showStatus(data.message || 'Saved — but you are not subscribed to texts.', 'info');
+          }
+        } else {
+          btn.textContent = originalText;
+          btn.disabled = !terms.checked;
+          showStatus((data && data.error) || 'Something went wrong. Please try again.', 'error');
+        }
+      } catch (err) {
+        btn.textContent = originalText;
+        btn.disabled = !terms.checked;
+        showStatus('Network error — please check your connection and try again.', 'error');
+      }
     }
   </script>
 
