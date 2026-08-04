@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Government Services — Maven Smart System Operator Training | WaveSurgeAI</title>
+<meta name="description" content="WaveSurgeAI is an SBA-certified SDVOSB delivering Maven Smart System (MSS) operator training, mobile training team (MTT) delivery, and train-the-trainer programs for Joint Operations Centers, National Guard, and DSCA domestic operations missions.">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Montserrat:wght@400;600;700&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --deep-navy: #0A1628; --navy: #1B3A6B; --steel-blue: #4A90D9;
+    --gold: #C9A84C; --red: #E74C3C; --white: #FFFFFF; --gray: #8892A4; --light-navy: #162040;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { background: var(--deep-navy); color: var(--white); font-family: 'Lato', sans-serif; }
+
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; padding: 20px 60px; display: flex; justify-content: space-between; align-items: center; background: rgba(10,22,40,0.98); border-bottom: 1px solid rgba(201,168,76,0.2); }
+  .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 28px; letter-spacing: 3px; text-decoration: none; }
+  .nav-logo .wave { color: var(--steel-blue); } .nav-logo .surge { color: var(--white); } .nav-logo .ai { color: var(--gold); }
+  .nav-back { font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); text-decoration: none; transition: color 0.3s; }
+  .nav-back:hover { color: var(--white); }
+
+  .hero { min-height: 55vh; display: flex; align-items: center; justify-content: center; text-align: center; padding: 140px 60px 80px; position: relative; overflow: hidden; background: linear-gradient(180deg, #0D1E35 0%, var(--deep-navy) 100%); }
+  .hero::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 50% 40%, rgba(74,144,217,0.07) 0%, transparent 70%); }
+  .hero-badge { display: inline-flex; align-items: center; gap: 10px; background: rgba(201,168,76,0.1); border: 1px solid rgba(201,168,76,0.45); padding: 8px 20px; margin-bottom: 28px; font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); }
+  .hero-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 20px; }
+  .hero-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(54px, 8vw, 96px); letter-spacing: 4px; line-height: 1; margin-bottom: 24px; }
+  .hero-title span { color: var(--gold); }
+  .hero-sub { font-size: 18px; color: var(--gray); max-width: 680px; margin: 0 auto 40px; line-height: 1.7; }
+  .hero-colonel { display: inline-block; margin-bottom: 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 600; letter-spacing: 2px; color: var(--gold); border-top: 1px solid rgba(201,168,76,0.3); border-bottom: 1px solid rgba(201,168,76,0.3); padding: 10px 0; }
+
+  .cred-strip { display: flex; justify-content: center; gap: 14px; flex-wrap: wrap; }
+  .cred-chip { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; color: var(--white); background: rgba(27,58,107,0.55); border: 1px solid rgba(74,144,217,0.4); padding: 8px 16px; }
+  .cred-chip b { color: var(--gold); font-weight: 700; }
+
+  .btn-primary { background: var(--gold); color: var(--deep-navy); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: none; cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,168,76,0.4); }
+  .btn-secondary { background: transparent; color: var(--white); padding: 16px 40px; font-family: 'Montserrat', sans-serif; font-size: 13px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border: 1px solid rgba(255,255,255,0.3); cursor: pointer; transition: all 0.3s; display: inline-block; }
+  .btn-secondary:hover { border-color: var(--steel-blue); color: var(--steel-blue); }
+
+  section { padding: 100px 60px; max-width: 1100px; margin: 0 auto; }
+  .section-eyebrow { font-family: 'Montserrat', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+  .section-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(40px, 5vw, 64px); letter-spacing: 3px; margin-bottom: 20px; }
+  .section-title span { color: var(--gold); }
+  .section-divider { width: 60px; height: 2px; background: linear-gradient(90deg, var(--gold), var(--steel-blue)); margin-bottom: 20px; }
+  .section-sub { font-size: 17px; color: var(--gray); line-height: 1.7; max-width: 640px; }
+
+  .includes-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 3px; margin-top: 48px; }
+  .include-item { background: var(--light-navy); padding: 32px; border-left: 3px solid var(--gold); transition: all 0.3s; }
+  .include-item:hover { background: var(--navy); transform: translateX(4px); }
+  .include-title { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 2px; color: var(--white); margin-bottom: 8px; }
+  .include-text { font-size: 14px; color: var(--gray); line-height: 1.6; }
+
+  .who-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 3px; margin-top: 48px; }
+  .who-card { background: var(--light-navy); padding: 36px; border-top: 3px solid var(--steel-blue); transition: all 0.3s; }
+  .who-card:hover { background: var(--navy); transform: translateY(-4px); }
+  .who-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+  .who-title { font-family: 'Bebas Neue', sans-serif; font-size: 24px; letter-spacing: 2px; color: var(--white); margin-bottom: 10px; }
+  .who-text { font-size: 14px; color: var(--gray); line-height: 1.7; }
+
+  .advantage-block { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; margin-top: 48px; position: relative; overflow: hidden; }
+  .advantage-block::before { content: ''; position: absolute; top: 0; left: 0; bottom: 0; width: 4px; background: linear-gradient(180deg, var(--gold), var(--steel-blue)); }
+  .advantage-title { font-family: 'Bebas Neue', sans-serif; font-size: 36px; letter-spacing: 2px; margin-bottom: 20px; }
+  .advantage-title span { color: var(--gold); }
+  .advantage-text { font-size: 16px; color: var(--gray); line-height: 1.8; margin-bottom: 16px; }
+
+  .co-block { background: var(--light-navy); border: 1px solid rgba(74,144,217,0.3); padding: 48px; margin-top: 48px; }
+  .co-title { font-family: 'Bebas Neue', sans-serif; font-size: 30px; letter-spacing: 2px; margin-bottom: 24px; }
+  .co-title span { color: var(--steel-blue); }
+  .co-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px 40px; margin-bottom: 28px; }
+  .co-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+  .co-value { font-size: 16px; color: var(--white); }
+  .co-note { font-size: 14px; color: var(--gray); line-height: 1.7; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px; }
+  .co-note a { color: var(--steel-blue); text-decoration: none; }
+  .co-note a:hover { color: var(--gold); }
+
+  .contact-strip { background: var(--navy); border: 1px solid rgba(201,168,76,0.2); padding: 60px; text-align: center; position: relative; overflow: hidden; margin: 0 60px 100px; }
+  .contact-strip::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--steel-blue), var(--gold), var(--steel-blue)); }
+  .contact-strip h2 { font-family: 'Bebas Neue', sans-serif; font-size: 48px; letter-spacing: 3px; margin-bottom: 16px; }
+  .contact-strip h2 span { color: var(--gold); }
+  .contact-strip p { font-size: 16px; color: var(--gray); margin-bottom: 40px; max-width: 520px; margin-left: auto; margin-right: auto; line-height: 1.7; }
+  .contact-methods { display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; margin-bottom: 40px; }
+  .contact-method { text-align: center; }
+  .contact-method-label { font-family: 'Montserrat', sans-serif; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 6px; }
+  .contact-method-value { font-size: 15px; color: var(--white); text-decoration: none; transition: color 0.3s; display: block; }
+  .contact-method-value:hover { color: var(--gold); }
+  .contact-buttons { display: flex; gap: 16px; justify-content: center; flex-wrap: wrap; }
+
+  footer { background: rgba(5,12,22,0.98); border-top: 1px solid rgba(201,168,76,0.15); padding: 32px 60px; text-align: center; }
+  .footer-copy { font-size: 13px; color: var(--gray); } .footer-copy span { color: var(--gold); }
+  .footer-ids { font-family: 'Montserrat', sans-serif; font-size: 11px; letter-spacing: 1px; color: var(--gray); margin-top: 8px; }
+  .footer-back { display: inline-block; margin-top: 12px; font-family: 'Montserrat', sans-serif; font-size: 12px; font-weight: 600; letter-spacing: 2px; text-transform: uppercase; color: var(--steel-blue); text-decoration: none; }
+  .footer-back:hover { color: var(--gold); }
+
+  @media (max-width: 768px) {
+    nav { padding: 16px 24px; } .hero { padding: 120px 24px 60px; } section { padding: 60px 24px; }
+    .who-grid { grid-template-columns: 1fr; } .includes-grid { grid-template-columns: 1fr; }
+    .advantage-block { padding: 40px 32px; } .co-block { padding: 32px 24px; } .co-grid { grid-template-columns: 1fr; }
+    .contact-strip { margin: 0 24px 60px; padding: 40px 24px; } .contact-methods { gap: 24px; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">
+    <span class="wave">Wave</span><span class="surge">Surge</span><span class="ai">AI</span>
+  </a>
+  <a href="index.html" class="nav-back">&larr; Back To WaveSurgeAI</a>
+</nav>
+
+<div class="hero">
+  <div>
+    <div class="hero-badge">&#9733; SBA-Certified Service-Disabled Veteran-Owned Small Business</div>
+    <p class="hero-eyebrow">Federal &amp; Defense Services</p>
+    <h1 class="hero-title">Government <span>Services</span></h1>
+    <p class="hero-sub">Operator readiness for the mission command era. WaveSurgeAI delivers training and readiness services for the information systems that power Joint Operations Centers &mdash; built by operators, for operators.</p>
+    <div class="hero-colonel">Colonel, US Army (Retired) &mdash; 27 Years &middot; Mission Command Information Systems</div>
+    <br>
+    <div class="cred-strip">
+      <div class="cred-chip"><b>UEI</b>&nbsp; Y3RYND8EV9V4</div>
+      <div class="cred-chip"><b>CAGE</b>&nbsp; 22QD4</div>
+      <div class="cred-chip"><b>NAICS</b>&nbsp; 541519 &middot; 611420</div>
+      <div class="cred-chip"><b>SDVOSB</b>&nbsp; SBA VetCert</div>
+    </div>
+    <br>
+    <div style="display:flex; gap:16px; justify-content:center; flex-wrap:wrap;">
+      <a href="#contracting" class="btn-primary">For Contracting Officers</a>
+      <a href="#capabilities" class="btn-secondary">Core Capabilities</a>
+    </div>
+  </div>
+</div>
+
+<section id="problem">
+  <p class="section-eyebrow">The Problem We Solve</p>
+  <h2 class="section-title">Fielding Velocity Outpaces <span>Operator Readiness</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">New mission command information systems reach operations centers faster than watch floors can grow operators who exploit them under pressure.</p>
+  <div class="advantage-block">
+    <h3 class="advantage-title">The Readiness <span>Gap</span></h3>
+    <p class="advantage-text">A powerful common operational picture platform delivers its value only when the operator on shift &mdash; at 0300, during a no-notice activation &mdash; can drive it with confidence. The system can be fielded in weeks. The operator takes deliberate, structured training.</p>
+    <p class="advantage-text">WaveSurgeAI closes the gap between system fielding and operator readiness: validated Programs of Instruction, hands-on training on the actual workstations, and instructors who have stood the watch themselves.</p>
+  </div>
+</section>
+
+<section id="capabilities" style="padding-top: 0;">
+  <p class="section-eyebrow">What We Do</p>
+  <h2 class="section-title">Core <span>Capabilities</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Structured operator readiness for Joint Operations Centers, grounded in National Guard mission sets and domestic operations.</p>
+  <div class="includes-grid">
+    <div class="include-item">
+      <div class="include-title">Maven Smart System (MSS) Operator Training</div>
+      <div class="include-text">Structured operator readiness programs for the Maven Smart System in Joint Operations Center environments: validated Programs of Instruction, hands-on practical exercises on government-furnished workstations, and scenario-driven assessment tied to real mission profiles.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Mobile Training Team (MTT) Delivery</div>
+      <div class="include-text">Training delivered where the mission lives &mdash; on-site at state and territory operations centers. Our mobile training team model brings certified instructors, complete courseware, and mission-tailored exercises to the watch floor.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Train-The-Trainer Programs</div>
+      <div class="include-text">Every engagement is designed to leave organic capability behind: instructor development tracks that certify unit trainers to sustain operator readiness long after the MTT departs.</div>
+    </div>
+    <div class="include-item">
+      <div class="include-title">Domestic Operations &amp; DSCA Focus</div>
+      <div class="include-text">Curriculum and exercises grounded in National Guard mission sets &mdash; Defense Support of Civil Authorities, emergency management integration, and the Title 32 operating environment &mdash; not generic software familiarization.</div>
+    </div>
+  </div>
+</section>
+
+<section id="why" style="padding-top: 0;">
+  <p class="section-eyebrow">Why WaveSurgeAI</p>
+  <h2 class="section-title">Built By <span>Operators</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">Founded by a retired U.S. Army colonel with 27 years in Army Mission Command Information Systems and National Guard joint operations. We train the way the Guard fights &mdash; because we have stood those watches.</p>
+  <div class="who-grid">
+    <div class="who-card">
+      <span class="who-icon">&#127894;</span>
+      <div class="who-title">Systems Depth</div>
+      <div class="who-text">Decades on the mission command information systems that JOCs actually run &mdash; not vendor familiarization, but operational fluency earned on watch.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">&#128218;</span>
+      <div class="who-title">Instructor Discipline</div>
+      <div class="who-text">ADDIE and Systems Approach to Training curriculum development, delivered by instructor-qualified, operations-center-experienced training teams.</div>
+    </div>
+    <div class="who-card">
+      <span class="who-icon">&#9889;</span>
+      <div class="who-title">Rapid Mobilization</div>
+      <div class="who-text">Full training capability from day one of performance &mdash; program leadership, training development, and mobile training teams ready to deliver.</div>
+    </div>
+  </div>
+</section>
+
+<section id="contracting" style="padding-top: 0;">
+  <p class="section-eyebrow">Contracting With Us</p>
+  <h2 class="section-title">For Contracting Officers &amp; <span>Small Business Specialists</span></h2>
+  <div class="section-divider"></div>
+  <p class="section-sub">WaveSurgeAI, LLC is registered and active in SAM.gov. Qualifying requirements may be eligible for SDVOSB sole-source or set-aside award under FAR 19.14.</p>
+  <div class="co-block">
+    <h3 class="co-title">Company <span>Data</span></h3>
+    <div class="co-grid">
+      <div>
+        <div class="co-label">Legal Name</div>
+        <div class="co-value">WaveSurgeAI, LLC</div>
+      </div>
+      <div>
+        <div class="co-label">Business Type</div>
+        <div class="co-value">SBA-Certified SDVOSB &middot; Small Business</div>
+      </div>
+      <div>
+        <div class="co-label">UEI</div>
+        <div class="co-value">Y3RYND8EV9V4</div>
+      </div>
+      <div>
+        <div class="co-label">CAGE Code</div>
+        <div class="co-value">22QD4</div>
+      </div>
+      <div>
+        <div class="co-label">Primary NAICS</div>
+        <div class="co-value">541519 &mdash; Other Computer Related Services</div>
+      </div>
+      <div>
+        <div class="co-label">Secondary NAICS</div>
+        <div class="co-value">611420 &mdash; Computer Training</div>
+      </div>
+      <div>
+        <div class="co-label">Location</div>
+        <div class="co-value">Westfield, Indiana</div>
+      </div>
+      <div>
+        <div class="co-label">Registration</div>
+        <div class="co-value">SAM.gov &mdash; Active</div>
+      </div>
+    </div>
+    <div class="co-note">SDVOSB certification is verifiable at <a href="https://search.certifications.sba.gov" target="_blank" rel="noopener">search.certifications.sba.gov</a>. Capability statement available on request &mdash; <a href="mailto:info@wavesurgeai.com">info@wavesurgeai.com</a>.</div>
+  </div>
+</section>
+
+<div id="contact-strip" class="contact-strip">
+  <h2>Start The <span>Conversation.</span></h2>
+  <p>Capabilities briefings available in person or by VTC. Reach out and we will respond within one business day.</p>
+  <div class="contact-methods">
+    <div class="contact-method">
+      <div class="contact-method-label">Point of Contact</div>
+      <span class="contact-method-value">Jeff Hackett, Managing Member</span>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Phone</div>
+      <a href="tel:2707910582" class="contact-method-value">270-791-0582</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Email</div>
+      <a href="mailto:info@wavesurgeai.com" class="contact-method-value">info@wavesurgeai.com</a>
+    </div>
+    <div class="contact-method">
+      <div class="contact-method-label">Address</div>
+      <span class="contact-method-value">16450 Oak Manor Drive<br>Westfield, IN 46074</span>
+    </div>
+  </div>
+  <div class="contact-buttons">
+    <a href="mailto:info@wavesurgeai.com?subject=Capabilities%20Briefing%20Request" class="btn-primary">Request A Capabilities Briefing</a>
+    <a href="tel:2707910582" class="btn-secondary">Call Now</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-copy">&copy; 2026 <span>WaveSurgeAI, LLC</span>. All rights reserved. &mdash; Colonel, US Army (Retired)</div>
+  <div class="footer-ids">SBA-Certified SDVOSB &middot; UEI: Y3RYND8EV9V4 &middot; CAGE: 22QD4 &middot; NAICS 541519 / 611420</div>
+  <a href="index.html" class="footer-back">&larr; Return To WaveSurgeAI.com</a>
+</footer>
+
+</body>
+</html>
