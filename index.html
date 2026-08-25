@@ -628,6 +628,52 @@
     padding: 4px 12px;
   }
 
+  /* VENUEHR SCREENSHOTS */
+  .screenshot-grid {
+    max-width: 1100px;
+    margin: 56px auto 0;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+
+  .screenshot-card {
+    background: var(--light-navy);
+    border: 1px solid rgba(201,168,76,0.15);
+    overflow: hidden;
+    transition: all 0.3s;
+  }
+
+  .screenshot-card:hover {
+    border-color: rgba(201,168,76,0.4);
+    transform: translateY(-4px);
+  }
+
+  .screenshot-card img {
+    width: 100%;
+    display: block;
+    border-bottom: 1px solid rgba(201,168,76,0.15);
+  }
+
+  .screenshot-caption {
+    padding: 18px 22px;
+  }
+
+  .screenshot-caption-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 19px;
+    letter-spacing: 1.5px;
+    color: var(--white);
+    margin-bottom: 4px;
+  }
+
+  .screenshot-caption-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12.5px;
+    color: var(--gray);
+    line-height: 1.5;
+  }
+
   /* ART GALLERY */
   #art-gallery {
     padding: 120px 60px;
@@ -1220,6 +1266,13 @@
       font-size: 42px;
     }
 
+    /* VENUEHR SCREENSHOTS */
+    .screenshot-grid {
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
     /* AI AFTER 50 */
     #ai-after-50 {
       padding: 80px 24px;
@@ -1451,7 +1504,39 @@
     <div class="section-divider"></div>
     <p class="section-sub">A complete HR platform for small businesses — document management, employee onboarding, timesheets and payroll, and compliance, all in one dashboard. Built with military precision.</p>
   </div>
-  <div style="max-width: 1100px; margin: 0 auto; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;" class="reveal">
+
+  <div class="screenshot-grid reveal">
+    <div class="screenshot-card">
+      <img src="assets/screenshots/venuehr-dashboard.jpg" alt="VenueHR admin dashboard showing total staff, pending agreements, signed agreements, and compliance rate" loading="lazy" decoding="async">
+      <div class="screenshot-caption">
+        <div class="screenshot-caption-title">Dashboard</div>
+        <div class="screenshot-caption-text">Compliance rate, pending agreements, and staffing status at a glance.</div>
+      </div>
+    </div>
+    <div class="screenshot-card">
+      <img src="assets/screenshots/venuehr-onboarding-wizard.jpg" alt="VenueHR onboarding wizard showing a staff agreement and e-signature step" loading="lazy" decoding="async">
+      <div class="screenshot-caption">
+        <div class="screenshot-caption-title">Onboarding</div>
+        <div class="screenshot-caption-text">Guided six-step wizard — every form read, signed, and recorded.</div>
+      </div>
+    </div>
+    <div class="screenshot-card">
+      <img src="assets/screenshots/venuehr-timesheets.jpg" alt="VenueHR timesheets table with clock in, clock out, hours, and break compliance columns" loading="lazy" decoding="async">
+      <div class="screenshot-caption">
+        <div class="screenshot-caption-title">Timesheets & Payroll</div>
+        <div class="screenshot-caption-text">Break-compliance tracking with one-click payroll export.</div>
+      </div>
+    </div>
+    <div class="screenshot-card">
+      <img src="assets/screenshots/venuehr-event-staffing.jpg" alt="VenueHR event staffing panel showing required headcount, staffing gaps, and assigned crew" loading="lazy" decoding="async">
+      <div class="screenshot-caption">
+        <div class="screenshot-caption-title">Event Staffing</div>
+        <div class="screenshot-caption-text">Broadcast openings, track confirmations, and fill gaps by role.</div>
+      </div>
+    </div>
+  </div>
+
+  <div style="max-width: 1100px; margin: 56px auto 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 2px;" class="reveal">
 
     <div class="feature-card" style="cursor:pointer;" onclick="window.location='venuehr.html'">
       <span class="feature-number">01</span>
