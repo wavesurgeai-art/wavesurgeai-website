@@ -481,7 +481,25 @@
   .about-visual {
     position: relative;
   }
-
+.about-photo {
+  position: relative;
+  margin-bottom: 24px;
+  border: 1px solid rgba(74,144,217,0.2);
+  overflow: hidden;
+}
+.about-photo::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 3px;
+  background: linear-gradient(90deg, var(--gold), var(--steel-blue));
+  z-index: 1;
+}
+.about-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
   .about-card {
     background: var(--navy);
     border: 1px solid rgba(74,144,217,0.2);
@@ -1454,12 +1472,15 @@
 <section id="about">
   <div class="about-grid">
     <div class="reveal">
-      <div class="about-badge">Colonel, US Army (Retired)</div>
+      <div class="about-badge">Jeff Hackett, Colonel, US Army (Retired)</div>
       <h2 class="about-heading">27 Years.<br>One <span>Mission.</span><br>New Battlefield.</h2>
-      <p class="about-text">After 27 years of service, I didn't stop. I surged forward into the next mission: building software that solves real problems for small business, training the operators who power our nation's operations centers, and delivering professional websites with military precision.</p>
-      <p class="about-text">WaveSurgeAI was born from the same discipline, precision, and commitment that defined every mission I led in uniform. Now that precision builds something new — compliance software that protects venues, training that makes operations centers mission-ready, and websites that elevate brands.</p>
+      <p class="about-text">After 27 years leading Soldiers and multimillion-dollar programs — from commanding a 670-person infantry battalion to serving as Chief Operating Officer (J3) for the 13,500+ person Indiana National Guard — I didn't stop leading. I surged forward into the next mission: building software that solves real problems for small business, training the operators who power our nation's operations centers, and delivering professional websites with military precision.</p>
+      <p class="about-text">I built an 816-person brigade from scratch, managed a $150 million annual operating budget, and led our state's largest disaster-relief response through the COVID-19 pandemic. WaveSurgeAI was born from that same discipline — compliance software that protects venues, training that makes operations centers mission-ready, and websites that elevate brands.</p>
       <blockquote class="about-quote">
         "Leadership isn't a title. It's a standard you set every single day."
+      <div class="about-photo">
+  <img src="jeff-hackett-headshot.jpg" alt="Jeff Hackett, Colonel, US Army (Retired), founder of WaveSurgeAI" loading="lazy" decoding="async">
+</div> 
         <cite>— Colonel, US Army (Retired)</cite>
       </blockquote>
       <div class="about-stats">
@@ -1874,7 +1895,7 @@ then change each [SECTION: X] marker back to an HTML comment.
       </div>
       <div class="footer-tagline">Ride The Wave. Surge Forward.</div>
       <p class="footer-desc">Compliance software, government training services, and professional website design — built with discipline, delivered with precision. Founded by a retired US Army Colonel.</p>
-      <div class="footer-attribution">— Colonel, US Army (Retired)</div>
+      <div class="footer-attribution">— Jeff Hackett, Colonel, US Army (Retired)</div>
     </div>
     <div>
       <div class="footer-col-title">Navigation</div>
